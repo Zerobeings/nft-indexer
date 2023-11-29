@@ -1,18 +1,18 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CUSZmixtape</title>
+<title>NFTmixtape</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Zero_beings">
-<meta name="twitter:title" content="Custom Zeros Base">
-<meta name="twitter:description" content="The entire Custom Zeros Collection.">
-<meta name="twitter:image" content="https://cuszmixtape.zerobeings.xyz/mixtape.png">
-<meta property="og:url" content="https://cuszmixtape.zerobeings.xyz/">
+<meta name="twitter:title" content="NFT Base">
+<meta name="twitter:description" content="The entire NFT Collection.">
+<meta name="twitter:image" content="https://mixtape.zerobeings.xyz/mixtape.png">
+<meta property="og:url" content="https://mixtape.zerobeings.xyz/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="CUSZbase">
-<meta property="og:description" content="The entire Custom Zeros Collection.">
-<meta property="og:image" content="https://cuszmixtape.zerobeings.xyz/mixtape.png">
+<meta property="og:title" content="Warpbase">
+<meta property="og:description" content="The entire NFT collection.">
+<meta property="og:image" content="https://mixtape.zerobeings.xyz/mixtape.png">
 <link rel="icon" href="mixtape.png">
 <meta charset="utf-8">
     <link rel="stylesheet"
@@ -242,12 +242,18 @@ td {
 
 .loader {
   color: white;
-  padding: 100px;
   font-size: 14px;
   opacity: 0.9;
   font-weight: bold;
   text-transform: uppercase;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 100%;
+  height: 155px;
+  margin-top: 75px;
 }
+
 .loading {
   display: inline-block;
   overflow: hidden;
@@ -334,16 +340,31 @@ td {
 @keyframes spin10 { to { transform: translateY(-15.0em); } }
 @keyframes spin11 { to { transform: translateY(-16.5em); } }
 @keyframes spin12 { to { transform: translateY(-18.0em); } }
+
+
+.item img {
+  display: none; /* Hide image initially */
+}
+
+.item img.loaded {
+  display: block; /* Show image once loaded */
+}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.1/sql-wasm.js"></script>
 
 <script>
+ function imageLoaded(id) {
+    document.querySelector(`#loading-icon-${id}`).style.display = 'none';
+    document.querySelector(`#image-${id}`).classList.add('loaded');
+  }
+
 class Loader {
   async init() {
     const sqlPromise = initSqlJs({
       locateFile: file => "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.1/sql-wasm.wasm"
     });
-    const dataPromise = fetch("eth/0x8f170F73076b7A45749677B1681b13366B3C80f7/mixtape.db").then(res => res.arrayBuffer());
+    const dataPromise = fetch("https://cors-anywhere.herokuapp.com/https://github.com/Zerobeings/warpc-mixtape/blob/main/mixtape.db").then(res => res.arrayBuffer());
     const [SQL, buf] = await Promise.all([sqlPromise, dataPromise])
     this.db = new SQL.Database(new Uint8Array(buf));
   }
@@ -391,7 +412,7 @@ class Loader {
         let o = { attributes: {} }
         for(let j=0; j<columns.length; j++) {
           let column = columns[j]
-          if (["index", "id", "name", "description", "image", "blockHash", "blockNumber", "self", "transactionHash", "uri"].includes(column)) {
+          if (["id", "index" ,"name", "description", "image", "blockHash", "blockNumber", "self", "transactionHash", "uri"].includes(column)) {
             o[column] = values[j]
           } else {
             o.attributes[column] = values[j]
@@ -407,6 +428,7 @@ class Loader {
           return `<tr class='row' data-key='${key}' data-val='${attributes[key]}'><td>${key}</td><td>${attributes[key]}</td></tr>`
         }).join("")
         let img
+        let id
         if (p.image.startsWith("http")) {
           img = "files/" + p.image.split("")
             .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
@@ -417,19 +439,24 @@ class Loader {
           img = p.image
         } else {
           img = "ipfs/" + p.image.replace("ipfs://", "")
-          
+          function extractId(url) {
+            const match = url.match(/\/(\d+)\.png$/);
+            return match ? parseInt(match[1], 10) : null;
+          }
+          id = extractId(img)
+
         }
 
         return `<div id='_item' class='item'>
-          <center><h4 style="color:white; background-color:black;margin-bottom:5px;margin-top:5px;">Warp Crystal #${id || index}</h4></center>
+          <center><h4 style="color:white; background-color:black;margin-bottom:5px;margin-top:5px;">${p.name}</h4></center>
           <div>
-            <div id="loading-icon-${id || index}" class="loader">
+            <div id="loading-icon-${p.index}" class="loader">
               <div class='loading dots'></div>
               <br>
               <div>loading...</div>
             </div>
-            <a target="_blank" href="https://opensea.io/assets/ethereum/0xB6C29b68FEcedbf005743C3EAf5139328B651Deb/${id || index}">
-              <img id="image-${id || index}" src="https://nftstorage.link/${img}" onload="imageLoaded(${id || index})">
+            <a target="_blank" href="https://opensea.io/assets/ethereum/0x8f170F73076b7A45749677B1681b13366B3C80f7/${p.index}">
+              <img id="image-${p.index}" src="https://nftstorage.link/${img}" onload="imageLoaded(${p.index})">
             </a>
           </div>
           <table>${table}</table>
@@ -490,8 +517,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   
   <div>
-    <a href="https://mixtape.cell.computer/#/" target="_blank"><img src = "/mixtape.PNG" width="318" height="196.6"></a></div>
-    <div class='sub'>Welcome the NFT Indexer & Trading Card Factory</div>
+    <a href="https://mixtape.cell.computer/#/" target="_blank"><img src = "/mixtape.png" width="318" height="196.6"></a></div>
+    <div class='sub'>Welcome to the NFT Trading Card Factory</div>
   <div>Created by...
     <a class='btn' href="https://zerobeings.xyz" target="_blank">Zero Beings</a>
     <a class='btn' href="https://twitter.com/Zero_beings" target="_blank">Twitter</a>
@@ -499,14 +526,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     ...Powered by...<a class='btn' href="https://mixtape.cell.computer">Mixtape</a>...a tool developed by...
     <a class='btn' href="https://twitter.com/skogard" target="_blank">Skogard</a>
   </div>
-  <div><a class='btn4' href="https://mint.zerobeings.xyz/" target="_blank">Mint a Zero Being</a></div>
 </nav>
 
   <div class="grid-container">
     <div class="queryTool">
       <nav>
         <table>
-          <div style="text-align:center;"><a style="font-size:32px ;">Find Your Favorite:</a></div>
+          <div style="text-align:center;"><a style="font-size:32px ;">Find Your NFT:</a></div>
           <tr>
             <td >SELECT</td>
             <td><input id='select' type='text' placeholder='select columns' value='*'></td>
@@ -521,7 +547,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           </tr>
           <tr>
             <td>LIMIT</td>
-            <td><input id='limit' type='text' placeholder='limit' value=16></td>
+            <td><input id='limit' type='text' placeholder='limit' value=12></td>
           </tr>
         </table>
         
@@ -542,7 +568,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <a class='btn2' onclick="downLoad()" id="downloader" href="#" style="text-decoration:none;">Download</a>
     </div>
     <div style="margin-bottom:20px ;"><img src="drGenerate.png" alt="" id="result" width="200px"></div>
-    <div class='twt'><a style="text-decoration:none;" href="https://twitter.com/intent/tweet?text=Mixtape...testing...1...2...3 @Zero_beings&hashtags=Zerobeings,CUSZ,NFTs,cc0" class="btn2" data-show-count="false" data-via="Zero_beings">Tweet</a></div>
+    <div class='twt'><a style="text-decoration:none;" href="https://twitter.com/intent/tweet?text=Mixtape...testing...1...2...3 @Zero_beings&hashtags=Zerobeings,CUSZ,WARPC,NFTs,cc0" class="btn2" data-show-count="false" data-via="Zero_beings">Tweet</a></div>
     
   </div>
 </div>
@@ -575,7 +601,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     /^data:image\/png/, "data:application/octet-stream");  
           
                   $("#downloader").attr(
-                  "download", "ZERB.png").attr(
+                  "download", "test.png").attr(
                   "href", newData);
             }
       function reset(){
