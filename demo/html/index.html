@@ -1,0 +1,596 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CUSZmixtape</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Zero_beings">
+<meta name="twitter:title" content="Custom Zeros Base">
+<meta name="twitter:description" content="The entire Custom Zeros Collection.">
+<meta name="twitter:image" content="https://cuszmixtape.zerobeings.xyz/mixtape.png">
+<meta property="og:url" content="https://cuszmixtape.zerobeings.xyz/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CUSZbase">
+<meta property="og:description" content="The entire Custom Zeros Collection.">
+<meta property="og:image" content="https://cuszmixtape.zerobeings.xyz/mixtape.png">
+<link rel="icon" href="mixtape.png">
+<meta charset="utf-8">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Aldrich">
+    
+<style>
+
+@font-face {
+  font-family: 'Aldrich';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Aldrich'), url('Aldrich-Regular.ttf') format('ttf');
+  } 
+
+body {
+  font-family: 'Aldrich';
+  margin: 20px 10px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: rgb(0, 0, 0);
+}
+nav {
+  text-align: center;
+  padding: 40px 0 20px 0;
+  color: rgb(255, 255, 255);
+  opacity: 0.9;
+}
+.sub {
+  font-size: 32px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+input[type=text] {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+textarea {
+  width: 100%;
+  height: 300px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.1);
+  padding: 5px;
+  box-sizing: border-box;
+}
+nav a {
+  font-family: 'Aldrich';
+  /*
+  letter-spacing: -3px;
+  */
+  text-decoration: none;
+  font-size: 40px;
+  font-weight: bold;
+  display: inline-block;
+  margin: 10px;
+  color: white;
+}
+nav td:nth-child(1) {
+  width: 100px;
+  font-weight: bold;
+  text-align: right;
+  vertical-align: middle;
+}
+nav table {
+  max-width: 800px;
+  width: 90%;
+  float: left;
+  margin:0 0 0 0;
+}
+
+nav td {
+  background: none;
+  color: rgb(145, 145, 145);
+  margin: 0 0 0 0;  
+  
+}
+
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 0;
+  
+}
+.item {
+  width: 250px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: black;
+  border-radius: 10px;
+}
+.item img {
+  width: 100%;
+  padding-bottom: 10px;
+}
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-spacing: 0;
+  border-color: white;
+  border-collapse: separate;
+}
+
+/* top-left border-radius */
+table tr:first-child td:first-child {
+  border-top-left-radius: 6px;
+}
+
+/* top-right border-radius */
+table tr:first-child td:last-child {
+  border-top-right-radius: 6px;
+}
+
+/* bottom-left border-radius */
+table tr:last-child td:first-child {
+  border-bottom-left-radius: 6px;
+}
+
+/* bottom-right border-radius */
+table tr:last-child td:last-child {
+  border-bottom-right-radius: 6px;
+}
+
+
+td {
+  background: black;
+  vertical-align: top;
+  word-wrap:break-word;
+  padding: 7px;
+  box-sizing: border-box;
+  font-size: 10px;
+  cursor: pointer;
+  color:white;
+}
+
+.container td:nth-child(1) {
+  font-weight: bold; 
+}
+.container td {
+  border: 1px solid white;
+}
+.container tr:hover td {
+  background: #EC9E72;
+  color:black;
+}
+#query {
+  margin-top: 5px;
+  background: rgb(65, 188, 225);
+  cursor: pointer;
+  padding: 10px;
+  max-width: 800px;
+  width: 70%;
+  box-sizing: border-box;
+  color: white;
+  border-radius: 10px;
+  border:none;
+  font-size: 20px;
+  font-family: 'Aldrich';
+  float: left;
+}
+.btn {
+  font-family: 'Aldrich';
+  font-size: 14px;
+  font-style: normal;
+  letter-spacing: 0;
+  background: black;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: 2px solid #EC9E72;
+  border-radius: 10px;
+}
+
+.btn2 {
+  font-family: 'Aldrich';
+  font-size: 14px;
+  font-style: normal;
+  letter-spacing: 0;
+  background: black;
+  color: white;
+  padding: 10px 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 2px solid #EC9E72;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn3 {
+  font-family: 'Aldrich';
+  font-size: 14px;
+  width: 17%;
+  font-style: normal;
+  letter-spacing: 0;
+  background: black;
+  color: white;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  margin-left: 5px;
+  border: 2px solid #EC9E72;
+  border-radius: 10px;
+  cursor: pointer;
+  float: left;
+}
+
+.btn4 {
+  font-family: 'Aldrich';
+  font-size: 14px;
+  font-style: normal;
+  letter-spacing: 0;
+  background: black;
+  color: white;
+  padding: 10px 10px;
+  margin: 10px 0;
+  border: 2px solid rgb(65, 188, 225);
+  border-radius: 10px;
+}
+
+.twt{
+  padding: 10px 10px;
+  margin: 5px 0;  
+}
+
+.loader {
+  color: white;
+  padding: 100px;
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.loading {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.3em;
+  margin-top: -0.3em;
+  line-height: 1.5em;
+  vertical-align: text-bottom;
+  font-size: 50px;
+  text-align: center;
+  width: 100%;
+}
+.loading::after {
+  display: inline-table;
+  white-space: pre;
+  text-align: left;
+}
+
+.queryTool {
+  grid-area: left;
+  align-items: center;
+}
+
+.generateCard {
+  grid-area: right;
+  align-content: center;
+  margin-top: 50px;
+ 
+}
+
+.grid-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  justify-content: center;
+  grid-template-areas:
+    'left right'
+}
+
+.grid-container > div {
+  align-items: center;
+  text-align: center;
+  padding: 20px 20px;
+}
+
+.audioPlayer{
+  display: block;
+  color: black;
+  border-radius: 5px;
+  margin:0 auto;
+}
+
+/* --- Types --- */
+
+/* default loading is ellip */
+.loading::after {
+  content: "\A.\A..\A...";
+  animation: spin4 2s steps(4) infinite;
+}
+
+.loading.dots::after {
+  content: "⠋\A⠙\A⠹\A⠸\A⠼\A⠴\A⠦\A⠧\A⠇\A⠏";
+  animation: spin10 1s steps(10) infinite;
+}
+
+.loading.dots2::after {
+  content: "⠋\A⠙\A⠚\A⠞\A⠖\A⠦\A⠴\A⠲\A⠳";
+  animation: spin9 1s steps(9) infinite;
+}
+
+.loading.dots3::after {
+  content: "⋮\A⋰\A⋯\A⋱";
+  text-align: center;
+  animation: spin4 1s steps(4) infinite;
+}
+@keyframes spin1  { to { transform: translateY( -1.5em); } }
+@keyframes spin2  { to { transform: translateY( -3.0em); } }
+@keyframes spin3  { to { transform: translateY( -4.5em); } }
+@keyframes spin4  { to { transform: translateY( -6.0em); } }
+@keyframes spin5  { to { transform: translateY( -7.5em); } }
+@keyframes spin6  { to { transform: translateY( -9.0em); } }
+@keyframes spin7  { to { transform: translateY(-10.5em); } }
+@keyframes spin8  { to { transform: translateY(-12.0em); } }
+@keyframes spin9  { to { transform: translateY(-13.5em); } }
+@keyframes spin10 { to { transform: translateY(-15.0em); } }
+@keyframes spin11 { to { transform: translateY(-16.5em); } }
+@keyframes spin12 { to { transform: translateY(-18.0em); } }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.1/sql-wasm.js"></script>
+
+<script>
+class Loader {
+  async init() {
+    const sqlPromise = initSqlJs({
+      locateFile: file => "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.1/sql-wasm.wasm"
+    });
+    const dataPromise = fetch("eth/0x8f170F73076b7A45749677B1681b13366B3C80f7/mixtape.db").then(res => res.arrayBuffer());
+    const [SQL, buf] = await Promise.all([sqlPromise, dataPromise])
+    this.db = new SQL.Database(new Uint8Array(buf));
+  }
+  next() {
+    let select = document.querySelector("#select").value
+    if (select.length === 0) {
+      select = "*"
+    } else {
+      if (select !== "*") {
+        if (!/.*image.*/.test(select)) {
+          select = select + ", image"
+        }
+        if (!/.*id.*/.test(select)) {
+          select = select + ", id"
+        }
+        if (!/.*uri.*/.test(select)) {
+          select = select + ", uri"
+        }
+      }
+    }
+    let where = document.querySelector("#where").value
+    let limit = parseInt(document.querySelector("#limit").value)
+    let sql = `SELECT ${select} FROM metadata`
+    if (where.length > 0) {
+      sql += ` WHERE ${where}`
+    }
+    if (limit > 0) {
+      sql += ` LIMIT ${limit}`
+    } else {
+      sql += " LIMIT 115"
+    }
+    const contents = this.db.exec(sql)
+    let index = 0;
+    let columns = []
+    let html = ""
+    if (contents.length === 0) {
+      html = "No results"
+    } else {
+      for(let column of contents[0].columns) {
+        columns.push(column)
+      }
+      let properties = []
+      for(let i=0; i<contents[0].values.length; i++) {
+        let values = contents[0].values[i];
+        let o = { attributes: {} }
+        for(let j=0; j<columns.length; j++) {
+          let column = columns[j]
+          if (["index", "id", "name", "description", "image", "blockHash", "blockNumber", "self", "transactionHash", "uri"].includes(column)) {
+            o[column] = values[j]
+          } else {
+            o.attributes[column] = values[j]
+          }
+        }
+        properties.push(o)
+      }
+      console.log(properties)
+      html = properties.map((p) => {
+        let attributes = p.attributes
+        let keys = Object.keys(attributes)
+        let table = keys.map((key) => {
+          return `<tr class='row' data-key='${key}' data-val='${attributes[key]}'><td>${key}</td><td>${attributes[key]}</td></tr>`
+        }).join("")
+        let img
+        if (p.image.startsWith("http")) {
+          img = "files/" + p.image.split("")
+            .map(c => c.charCodeAt(0).toString(16).padStart(2, "0"))
+            .join("");
+        } else if (p.image.startsWith("data:image")) {
+          img = p.image
+        } else if (p.image.startsWith("files/")) {
+          img = p.image
+        } else {
+          img = "ipfs/" + p.image.replace("ipfs://", "")
+          
+        }
+
+        return `<div id='_item' class='item'>
+          <center><h4 style="color:white; background-color:black;margin-bottom:5px;margin-top:5px;">Warp Crystal #${id || index}</h4></center>
+          <div>
+            <div id="loading-icon-${id || index}" class="loader">
+              <div class='loading dots'></div>
+              <br>
+              <div>loading...</div>
+            </div>
+            <a target="_blank" href="https://opensea.io/assets/ethereum/0xB6C29b68FEcedbf005743C3EAf5139328B651Deb/${id || index}">
+              <img id="image-${id || index}" src="https://nftstorage.link/${img}" onload="imageLoaded(${id || index})">
+            </a>
+          </div>
+          <table>${table}</table>
+        </div>`
+      }).join("")
+    }
+
+    document.querySelector(".container").innerHTML = html
+  }
+}
+document.addEventListener("DOMContentLoaded", async () => {
+  const loader = new Loader()
+  await loader.init()
+  loader.next()
+  document.querySelector("#query").addEventListener("click", () => {
+    loader.next()
+  })
+  document.querySelector(".container").addEventListener("click", (e) => {
+    let target = (e.target.className === "row" ? e.target : (e.target.closest(".row") ? e.target.closest(".row") : null))
+    if (target) {
+      let key = target.getAttribute('data-key')
+      let val = target.getAttribute('data-val')
+      let where = document.querySelector("#where").value
+      if (where.trim().length > 0) {
+        document.querySelector("#where").value = `${where} AND\n"${key}" = "${val}"`
+      } else {
+        document.querySelector("#where").value = `"${key}" = "${val}"`
+      }
+      loader.next()
+    }
+  })
+})
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const loader = new Loader()
+  await loader.init()
+  loader.next()
+  document.getElementById("reset").addEventListener("click", () => {
+    loader.next()
+  })
+})
+
+</script>
+<script src="html2canvas.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+</head>
+
+
+<body>
+
+<nav>
+  <div style="font-size:7vw; text-align: center;">
+    <h1>NFTmixtape</h1>
+    <audio class='audioPlayer' controls loop src="zerobeings.mp3">Your browser does not support the<code>audio</code> element.</audio>
+  </div> 
+
+  
+  <div>
+    <a href="https://mixtape.cell.computer/#/" target="_blank"><img src = "/mixtape.PNG" width="318" height="196.6"></a></div>
+    <div class='sub'>Welcome the NFT Indexer & Trading Card Factory</div>
+  <div>Created by...
+    <a class='btn' href="https://zerobeings.xyz" target="_blank">Zero Beings</a>
+    <a class='btn' href="https://twitter.com/Zero_beings" target="_blank">Twitter</a>
+    <a class='btn' href="https://discord.gg/sjbVYr6ZXS" target="_blank">Discord</a>
+    ...Powered by...<a class='btn' href="https://mixtape.cell.computer">Mixtape</a>...a tool developed by...
+    <a class='btn' href="https://twitter.com/skogard" target="_blank">Skogard</a>
+  </div>
+  <div><a class='btn4' href="https://mint.zerobeings.xyz/" target="_blank">Mint a Zero Being</a></div>
+</nav>
+
+  <div class="grid-container">
+    <div class="queryTool">
+      <nav>
+        <table>
+          <div style="text-align:center;"><a style="font-size:32px ;">Find Your Favorite:</a></div>
+          <tr>
+            <td >SELECT</td>
+            <td><input id='select' type='text' placeholder='select columns' value='*'></td>
+          </tr>
+          <tr>
+            <td>FROM</td>
+            <td>metadata</td>
+          </tr>
+          <tr>
+            <td>WHERE</td>
+            <td><textarea id='where' placeholder='where condition'></textarea></td>
+          </tr>
+          <tr>
+            <td>LIMIT</td>
+            <td><input id='limit' type='text' placeholder='limit' value=16></td>
+          </tr>
+        </table>
+        
+          <button id='query'>Query</button>
+          <button class="btn3" onclick="reset()" id="reset">Reset</button>
+        
+      </nav>
+      
+  </div>
+  
+
+  <div class="generateCard" style="background-color: #35373C; border-radius: 10px;">
+ 
+    <a style="font-size:32px; color: white;margin-top: 40px;text-align: center;">Generate Your Card:</a>
+    <div>
+      
+    <button class='btn2' onclick="generate()" >Generate</button>
+    <a class='btn2' onclick="downLoad()" id="downloader" href="#" style="text-decoration:none;">Download</a>
+    </div>
+    <div style="margin-bottom:20px ;"><img src="drGenerate.png" alt="" id="result" width="200px"></div>
+    <div class='twt'><a style="text-decoration:none;" href="https://twitter.com/intent/tweet?text=Mixtape...testing...1...2...3 @Zero_beings&hashtags=Zerobeings,CUSZ,NFTs,cc0" class="btn2" data-show-count="false" data-via="Zero_beings">Tweet</a></div>
+    
+  </div>
+</div>
+
+    <script>
+        // Global variable
+        var getCanvas
+
+      function generate() {
+          html2canvas(document.getElementById("_item"), {
+              backgroundColor:null,
+              letterRendering: 1,
+              allowTaint: false,
+              useCORS: true,
+          })
+              .then(function (canvas) {
+                  
+                  document.getElementById("result").src = canvas.toDataURL("image/png", 1);
+                  getCanvas=canvas
+              })
+
+              .catch((e) => {
+                  alert(e);
+              });
+              
+            }
+      function downLoad(){
+              imgageData = getCanvas.toDataURL("image/png", 1);
+                    var newData = imgageData.replace(
+                    /^data:image\/png/, "data:application/octet-stream");  
+          
+                  $("#downloader").attr(
+                  "download", "ZERB.png").attr(
+                  "href", newData);
+            }
+      function reset(){
+        document.querySelector("#where").value = "";
+        document.getElementById("result").src = "drGenerate.png"
+      }      
+
+    </script>
+</nav>
+<div class='container'>
+  <div class='loader'>
+    <div class='loading dots'></div>
+    <br>
+    <div>loading</div>
+  </div>
+</div>
+</body>
+</html>
