@@ -63,7 +63,7 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
     }
   });
 
-  const provider = new ethers.JsonRpcProvider('https://mainnet.infura.io/v3/API_KEY');
+  const provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
   const contractAddress = readlineSync.question('Enter the contract address: ');
   const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
   const endToken = parseInt(readlineSync.question('Enter the ending token ID: '), 10);
