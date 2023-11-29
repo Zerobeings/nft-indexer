@@ -1,5 +1,5 @@
-// Usage: node mixtapeIndexer.example.js
-// This script will fetch the metadata for a given contract and token range, and create a database of the metadata.
+// Usage: node mixtapeIndexer-image.js
+// This script will fetch the metadata for a given contract and token range, download the images to the images/ folder, and create a database.
 
 const Mixtape = require('mixtapejs');
 const fetch = require('cross-fetch');
@@ -38,6 +38,35 @@ const fetchWithTimeout = async (url, timeout = 10000) => {
   }
 };
 
+const downloadImage = async (url, filename) => {
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Failed to download image: ${response.statusText}`);
+    }
+
+    const contentType = response.headers.get('content-type');
+    
+    // Check if the response is an image (e.g., "image/png", "image/jpeg")
+    if (contentType && contentType.startsWith('image')) {
+      const fileStream = fs.createWriteStream(filename);
+      const stream = response.body.pipe(fileStream);
+
+      return new Promise((resolve, reject) => {
+        stream.on('finish', () => resolve(filename));
+        stream.on('error', (error) => reject(error));
+      });
+    } else {
+      throw new Error(`Received non-image content type: ${contentType}`);
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
 const isIPFS = (url) => {
   return url.startsWith('ipfs://') || url.includes('ipfs/');
 };
@@ -47,6 +76,13 @@ const getIPFSUrl = (url) => {
   const gateway = getNextIPFSGateway();
   return `${gateway}${CID}`;
 };
+
+const getIPFSImageUrl = (url) => {
+  const CID = url.replace('ipfs://', '').split('/')[0];
+  const imageName = url.split('/').pop();
+  const gateway = getNextIPFSGateway();
+  return `${gateway}${CID}/${imageName}`;
+}
 
 const getContractURI = async (contractAddress, tokenId, provider) => {
   const contract = new ethers.Contract(contractAddress, [
@@ -76,7 +112,19 @@ for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
       const uri = await getContractURI(contractAddress, tokenId, provider);
       const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
       let metadata = await fetchWithTimeout(fetchURI + `/${tokenId}.json`).then((r) => r.json());
-      metadata.index = tokenId; // Add id to metadata
+      metadata.index = tokenId; // Add index to metadata
+
+      let imageUrl = metadata.image;
+      if (isIPFS(imageUrl)) {
+        imageUrl = getIPFSImageUrl(imageUrl);
+        console.log(imageUrl);
+      }
+
+      // Update metadata with the new image URL
+      metadata.image = imageUrl;
+
+      const filename = path.join('images', `${tokenId}${path.extname(new URL(imageUrl).pathname)}`);
+      await downloadImage(imageUrl, filename);
 
       await mixtape.write("metadata", metadata);
 
