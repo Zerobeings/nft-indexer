@@ -60,6 +60,7 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
     }
   });
 
+  //const provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
   const provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
   const contractAddress = readlineSync.question('Enter the contract address: ');
   const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
