@@ -1,3 +1,5 @@
 # General
 .DS_Store
 node_modules
+
+continuousIndexing.js
