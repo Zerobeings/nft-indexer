@@ -1,6 +1,10 @@
 # nft-indexer
 mixtapeIndexer.js is a utility script for fetching and processing token metadata from a given Ethereum contract. It uses the [mixtapejs](https://www.npmjs.com/package/mixtapejs?activeTab=readme) library to handle the metadata and the ethers.js library to interact with the Ethereum contract.
 
+The mixtape databases are designed to be used with nft-fetcher, a library for fetching NFT metadata from a database. You can find more information about nft-fetcher [here](https://www.npmjs.com/package/nft-fetcher).
+
+To make an index request go to [indexer.locatia.app](https://indexer.locatia.app/).
+
 ## Dependencies
 
 - `mixtapejs`: A library for handling metadata.
@@ -50,6 +54,48 @@ Run the script in Node.js. When prompted, enter the contract address and the ran
 
 ```bash
 node mixtapeIndexer-image.js
+```
+
+Please ensure that all the required dependencies are installed in your project. You can install them using npm:
+
+```bash
+npm install mixtapejs cross-fetch ethers readline-sync
+```
+
+# continuousIndexer.js
+
+This JavaScript file is a utility script for continuously fetching and processing token metadata from Ethereum and Polygon contracts. It uses the Mixtape library to handle the metadata and the ethers.js library to interact with the Ethereum and Polygon contracts.
+
+## Dependencies
+
+- `mixtapejs`: A library for handling metadata.
+- `cross-fetch`: A library to perform HTTP requests.
+- `fs` and `path`: Node.js built-in modules for file system operations.
+- `ethers`: A library to interact with Ethereum and Polygon blockchain and their smart contracts.
+- `readline-sync`: A library to read user input from the console.
+- `util`: Node.js built-in module, used here to promisify the pipeline function from the 'stream' module.
+- `child_process`: Node.js built-in module, used here to execute shell commands for Git operations.
+
+## How it works
+
+1. The script initializes an instance of Mixtape.
+2. It defines a list of IPFS gateways and a function to cycle through these gateways.
+3. It defines a function to fetch data from a URL with a timeout.
+4. It defines a function to check if a URL is an IPFS URL and another function to get the corresponding HTTP URL for an IPFS URL.
+5. It defines a function to get the token URI from a contract.
+6. The script then fetches data from a request using an API key and network as parameters.
+7. For each contract in the fetched data, it checks if a folder for the contract exists. If not, it updates the indexed collections and creates a Mixtape for the contract.
+8. The fetched metadata is written to the Mixtape instance.
+9. The script logs the progress and any errors to the console.
+10. After processing all contracts for a network, it commits and pushes the changes to a Git repository.
+11. The script runs for the Ethereum network, waits for 15 minutes, and then runs for the Polygon network.
+
+## Usage
+
+Run the script in Node.js. The script will fetch and process the metadata for each contract in the fetched data and log the progress to the console.
+
+```bash
+node continuousIndexer.js
 ```
 
 Please ensure that all the required dependencies are installed in your project. You can install them using npm:
