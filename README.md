@@ -1,5 +1,5 @@
 # nft-indexer
-mixtapeIndexer.js is a utility script for fetching and processing token metadata from a given Ethereum contract. It uses the Mixtape library to handle the metadata and the ethers.js library to interact with the Ethereum contract.
+mixtapeIndexer.js is a utility script for fetching and processing token metadata from a given Ethereum contract. It uses the [mixtapejs](https://www.npmjs.com/package/mixtapejs?activeTab=readme) library to handle the metadata and the ethers.js library to interact with the Ethereum contract.
 
 ## Dependencies
 
