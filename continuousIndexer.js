@@ -18,13 +18,7 @@ const ipfsGateways = [
 let currentGatewayIndex = 0;
 let isMixtapeBeingBuilt = false;
 
-const fetchDataFromRequest = async (network) => {
-    const response = await fetch(`${process.env.API_KEY}network=${encodeURIComponent(network)}`);
-    const newData = await response.json();
-    return newData;
-};
-
-async function updateIndexedCollections(contractAddress, network) {
+async function updateIndexedCollections(contractAddress, network){
   try {
       // Determine the correct directory based on the network
       const dirPath = network === 'ethereum' ? 'eth-indexed' : 'poly-indexed';
@@ -55,6 +49,11 @@ async function updateIndexedCollections(contractAddress, network) {
   }
 }
 
+const fetchDataFromRequest = async (network) => {
+  const response = await fetch(`${process.env.API_KEY}network=${encodeURIComponent(network)}`);
+  const newData = await response.json();
+  return newData;
+};
 
 const checkIfFolderExists = (contractAddress, network) => {
   const directoryPath = path.join(__dirname, network);
@@ -106,21 +105,22 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
 
 
 const createMixtapeForContract = async ( contractAddress, startToken, endToken, network ) => {
+  console.log(`Creating mixtape for ${contractAddress}...${network}`);
   await mixtape.init({
+    path: path.join(__dirname, network, contractAddress, 'mixtape.db'),
     config: {
       metadata: { schema: "migrate" }
     }
   });
 
-  if (network === 'polygon') {
-    const provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
-  }
-  if (network === 'ethereum') {
-    const provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
-  }
-  const contractAddress = readlineSync.question('Enter the contract address: ');
-  const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
-  const endToken = parseInt(readlineSync.question('Enter the ending token ID: '), 10);
+  let provider;
+
+if (network === 'polygon') {
+    provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
+}
+if (network === 'ethereum') {
+    provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
+}
 
   const networkDirPath = path.join(__dirname, network);
   if (!fs.existsSync(networkDirPath)) {
@@ -131,8 +131,6 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   if (!fs.existsSync(dirPath)){
       fs.mkdirSync(dirPath);
   }
-
-  const dbFilePath = path.join(dirPath, 'mixtape.db');
 
   for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
     let success = false;
@@ -169,7 +167,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   isMixtapeBeingBuilt = true;
 
   console.log(`Finished fetching all tokens for ${contractAddress}.`);
-}();
+};
 
 const delay = 15 * 60 * 1000; // 15 minutes in milliseconds
 
@@ -211,3 +209,5 @@ const pushToGitHub = (network) => {
 runScriptForNetwork('ethereum').then(() => {
     setTimeout(() => runScriptForNetwork('polygon'), delay);
 });
+
+module.exports = { updateIndexedCollections, fetchDataFromRequest, runScriptForNetwork };

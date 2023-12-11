@@ -12,5 +12,12 @@
     "ethers": "^6.9.0",
     "mixtapejs": "^0.1.9",
     "readline-sync": "^1.4.10"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nock": "^13.4.0"
   }
 }
