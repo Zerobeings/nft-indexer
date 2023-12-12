@@ -119,7 +119,7 @@ if (network === 'polygon') {
     provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
 }
 if (network === 'ethereum') {
-    provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
+    provider = new ethers.providers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
 }
 
   const networkDirPath = path.join(__dirname, network);
