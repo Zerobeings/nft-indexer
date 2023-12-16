@@ -16,7 +16,6 @@ const ipfsGateways = [
 ];
 
 let currentGatewayIndex = 0;
-let isMixtapeBeingBuilt = false;
 
 async function updateIndexedCollections(contractAddress, network){
   try {
@@ -106,31 +105,32 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
 
 const createMixtapeForContract = async ( contractAddress, startToken, endToken, network ) => {
   console.log(`Creating mixtape for ${contractAddress}...${network}`);
+
+  let provider;
+
+  if (network === 'polygon') {
+      provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
+  }
+  if (network === 'ethereum') {
+      provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
+  }
+  
+    const networkDirPath = path.join(__dirname, network);
+    if (!fs.existsSync(networkDirPath)) {
+        fs.mkdirSync(networkDirPath);
+    }
+  
+    const dirPath = path.join(networkDirPath, contractAddress);
+    if (!fs.existsSync(dirPath)){
+        fs.mkdirSync(dirPath);
+    }
+
   await mixtape.init({
     path: path.join(__dirname, network, contractAddress, 'mixtape.db'),
     config: {
       metadata: { schema: "migrate" }
     }
   });
-
-  let provider;
-
-if (network === 'polygon') {
-    provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
-}
-if (network === 'ethereum') {
-    provider = new ethers.providers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
-}
-
-  const networkDirPath = path.join(__dirname, network);
-  if (!fs.existsSync(networkDirPath)) {
-      fs.mkdirSync(networkDirPath);
-  }
-
-  const dirPath = path.join(networkDirPath, contractAddress);
-  if (!fs.existsSync(dirPath)){
-      fs.mkdirSync(dirPath);
-  }
 
   for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
     let success = false;
@@ -144,7 +144,6 @@ if (network === 'ethereum') {
 
 
         await mixtape.write("metadata", metadata);
-        mixtape.saveToFile(dbFilePath);
         success = true;
         console.log(`Fetched and processed token ${tokenId}`);
       } catch (error) {
@@ -163,8 +162,6 @@ if (network === 'ethereum') {
       }
     }
   }
-
-  isMixtapeBeingBuilt = true;
 
   console.log(`Finished fetching all tokens for ${contractAddress}.`);
 };
