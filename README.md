@@ -3,7 +3,23 @@ mixtapeIndexer.js is a utility script for fetching and processing token metadata
 
 The mixtape databases are designed to be used with nft-fetcher, a library for fetching NFT metadata from a database. You can find more information about nft-fetcher [here](https://www.npmjs.com/package/nft-fetcher).
 
-To make an index request go to [indexer.locatia.app](https://indexer.locatia.app/).
+There are three methods of indexing a collection to this repository:
+1. Make an index request at [https://indexer.locatia.app/request](https://indexer.locatia.app/request) (Recommended).
+2. Use the [mixtapeIndexer.js](#mixtapeIndexer) script to index a collection (Recommended to add your collection quickly).
+    - Fork this repo and run the mixtapeIndexer.js script locally.
+    - Submit a pull request to this repo with the output of the mixtapeIndexer.js script.
+    - Pull request requirements: 
+        - Must meet the content policy requirements outlined here: [https://indexer.locatia.app/request](https://indexer.locatia.app/request).
+        - The output of the script should be saved in a file named `mixtape.db`.
+        - The file should be saved in a folder named after the contract address.
+        - The folder should be saved in a folder named of the collections respective network.
+        - Submit an index request at [https://indexer.locatia.app/request](https://indexer.locatia.app/request) to add to the index record.
+3. Advanced: Use the [continuousIndexer.js](#continuousIndexer) script to continuously index a collection.
+    - Fork this repo and run the continuousIndexer.js script locally.
+    - Submit a pull request to this repo with the output of the continuousIndexer.js script.
+    - Pull request requirements:
+        - Must meet the content policy requirements outlined here: [https://indexer.locatia.app/request](https://indexer.locatia.app/request).
+        - Submit the index request for each collection added at [https://indexer.locatia.app/request](https://indexer.locatia.app/request) to add to the index record.
 
 ## Dependencies
 
