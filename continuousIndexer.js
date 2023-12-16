@@ -126,7 +126,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
     }
 
   await mixtape.init({
-    path: path.join(__dirname, network, contractAddress, 'mixtape.db'),
+    path: path.join(__dirname, network, contractAddress),
     config: {
       metadata: { schema: "migrate" }
     }
