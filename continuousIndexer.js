@@ -139,7 +139,23 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
       try {
         const uri = await getContractURI(contractAddress, tokenId, provider);
         const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
-        let metadata = await fetchWithTimeout(fetchURI + `/${tokenId}.json`).then((r) => r.json());
+        
+        let metadata;
+        try {
+          const responseWithExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}.json`);
+          metadata = await responseWithExtension.json();
+        } catch (errorWithExtension) {
+          console.error(`Error fetching with .json extension: ${errorWithExtension.message}`);
+          
+          try {
+            const responseWithoutExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}`);
+            const responseText = await responseWithoutExtension.text();
+            metadata = JSON.parse(responseText); // Parse the response text into JSON
+          } catch (errorWithoutExtension) {
+            console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
+          }
+        }
+
         metadata.index = tokenId; // Add index to metadata
 
 
