@@ -21,6 +21,9 @@ There are three methods of indexing a collection to this repository:
         - Must meet the content policy requirements outlined here: [https://indexer.locatia.app/request](https://indexer.locatia.app/request).
         - Submit the index request for each collection added at [https://indexer.locatia.app/request](https://indexer.locatia.app/request) to add to the index record.
 
+# mixtapeIndexer.js
+This script is used to fetch and process metadata for a range of tokens from a specific Ethereum contract. It uses the Mixtape library to store the fetched metadata.
+
 ## Dependencies
 
 - `mixtapejs`: A library for handling metadata.
