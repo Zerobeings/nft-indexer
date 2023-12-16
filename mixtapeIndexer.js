@@ -54,7 +54,12 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
 };
 
 (async () => {
+  const contractAddress = readlineSync.question('Enter the contract address: ');
+  const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
+  const endToken = parseInt(readlineSync.question('Enter the ending token ID: '), 10);
+  
   await mixtape.init({
+    path: path.join(__dirname, "ethereum", contractAddress), // switch network here
     config: {
       metadata: { schema: "migrate" }
     }
@@ -62,9 +67,6 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
 
   //const provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
   const provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
-  const contractAddress = readlineSync.question('Enter the contract address: ');
-  const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
-  const endToken = parseInt(readlineSync.question('Enter the ending token ID: '), 10);
 
 for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
   let success = false;
@@ -73,7 +75,23 @@ for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
     try {
       const uri = await getContractURI(contractAddress, tokenId, provider);
       const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
-      let metadata = await fetchWithTimeout(fetchURI + `/${tokenId}.json`).then((r) => r.json());
+
+      let metadata;
+        try {
+          const responseWithExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}.json`);
+          metadata = await responseWithExtension.json();
+        } catch (errorWithExtension) {
+          console.error(`Error fetching with .json extension: ${errorWithExtension.message}`);
+          
+          try {
+            const responseWithoutExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}`);
+            const responseText = await responseWithoutExtension.text();
+            metadata = JSON.parse(responseText); // Parse the response text into JSON
+          } catch (errorWithoutExtension) {
+            console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
+          }
+        }
+
       metadata.index = tokenId; // Add index to metadata
 
       await mixtape.write("metadata", metadata);
