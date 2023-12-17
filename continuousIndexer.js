@@ -200,7 +200,11 @@ const runScriptForNetwork = async (network) => {
         }
     }
     // After mixtape creation is complete
-    await pushToGitHub(network);
+    try {
+      await pushToGitHub(network);
+    } catch (error) {
+      console.error(`Error pushing to GitHub: ${error.message}`);
+    }
 };
 
 const pushToGitHub = (network) => {
@@ -217,6 +221,8 @@ const pushToGitHub = (network) => {
             console.log(`Stdout: ${stdout}`);
             resolve(stdout);
         });
+    }).catch((error) => {
+        console.error(`Error pushing to GitHub: ${error.message}`);
     });
 };
 
