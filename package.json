@@ -10,7 +10,7 @@
     "cross-fetch": "^4.0.0",
     "dotenv": "^16.3.1",
     "ethers": "^6.9.0",
-    "nft-mixtapejs": "^0.0.1",
+    "nft-mixtapejs": "^0.0.3",
     "readline-sync": "^1.4.10"
   },
   "scripts": {
