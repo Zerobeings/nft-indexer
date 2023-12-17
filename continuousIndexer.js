@@ -135,16 +135,17 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
     let success = false;
     let attempts = 0;
-    while (!success && attempts < 5) {
+    while (!success && attempts < 15) {
       try {
         const uri = await getContractURI(contractAddress, tokenId, provider);
         const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
-        
+
         let metadata;
         try {
           const responseWithExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}.json`);
           metadata = await responseWithExtension.json();
         } catch (errorWithExtension) {
+          attempts++;
           console.error(`Error fetching with .json extension: ${errorWithExtension.message}`);
           
           try {
@@ -152,6 +153,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
             const responseText = await responseWithoutExtension.text();
             metadata = JSON.parse(responseText); // Parse the response text into JSON
           } catch (errorWithoutExtension) {
+            attempts++;
             console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
           }
         }
@@ -171,7 +173,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
           break;
         }
         
-        if (attempts >= 5) {
+        if (attempts >= 15) {
           console.error(`Failed to fetch metadata for token ${tokenId} after multiple attempts, stopping.`);
           break;
         }
