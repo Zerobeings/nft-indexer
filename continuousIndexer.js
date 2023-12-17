@@ -89,7 +89,7 @@ const isIPFS = (url) => {
 
 const getIPFSUrl = (url) => {
   const CID = url.replace('ipfs://', '').split('/')[0];
-  const gateway = getNextIPFSGateway();
+  const gateway = 'https://ipfs.io/ipfs/';
   return `${gateway}${CID}`;
 };
 
