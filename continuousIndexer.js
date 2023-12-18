@@ -98,12 +98,33 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
     'function tokenURI(uint256 tokenId) external view returns (string memory)'
   ], provider);
 
-  return await contract.tokenURI(tokenId);
+  providerI = new ethers.JsonRpcProvider(process.env.INFURA_URL);
+
+  abiSpecial = [
+    'function tokenURI(uint256 tokenId) view returns (string)'
+  ];
+
+  const contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
+
+  try {
+    return await contract.tokenURI(tokenId);
+  } catch (error) {
+    try {
+      return await contractSpecial.tokenURI(tokenId);
+    } catch (error) {
+      console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+    }
+  }
 };
 
 const parseDataUri = (dataUri) => {
-  const jsonPart = dataUri.split(',')[1];
-  return JSON.parse(decodeURIComponent(jsonPart));
+  const jsonPart = dataUri.split('utf-8,')[1];
+  try {
+    return JSON.parse(jsonPart);
+  } catch (error) {
+    console.error(`Error parsing JSON: ${error.message}`);
+    throw error;
+  }
 };
 
 const createMixtapeForContract = async ( contractAddress, startToken, endToken, network ) => {
@@ -147,7 +168,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
         try {
             const uri = await getContractURI(contractAddress, tokenId, provider);
             const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
-            console.log(`Fetching metadata for token ${tokenId} from ${fetchURI}`);
+            console.log(`Fetching metadata for token ${tokenId}`);
 
             if (uri.startsWith('data:application/json')) {
                 metadata = parseDataUri(uri);
@@ -157,7 +178,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
                 const responseText = await response.text();
                 metadata = JSON.parse(responseText); // Parse the response text into JSON
               } catch (error) {
-                console.error(`Error fetching from ${uri}: ${error.message}`);
+                console.error(`Error fetching from: ${error.message}`);
               }     
             } else {
                 try {
