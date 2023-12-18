@@ -203,6 +203,26 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
 
 const delay = 15 * 60 * 1000; // 15 minutes in milliseconds
 
+
+const pushToGitHub = (network) => {
+  return new Promise((resolve, reject) => {
+      exec(`git add . && git commit -m "Added mixtape for ${network}" && git push`, (error, stdout, stderr) => {
+          if (error) {
+              console.error(`Error: ${error.message}`);
+              return reject(error);
+          }
+          if (stderr) {
+              console.error(`Stderr: ${stderr}`);
+              return reject(stderr);
+          }
+          console.log(`Stdout: ${stdout}`);
+          resolve(stdout);
+      });
+  }).catch((error) => {
+      console.error(`Error pushing to GitHub: ${error.message}`);
+  });
+};
+
 const runScriptForNetwork = async (network) => {
     console.log(`Running script for the ${network} network...`);
     // Fetch data from the sheet
@@ -222,25 +242,6 @@ const runScriptForNetwork = async (network) => {
     } catch (error) {
       console.error(`Error pushing to GitHub: ${error.message}`);
     }
-};
-
-const pushToGitHub = (network) => {
-    return new Promise((resolve, reject) => {
-        exec(`git add . && git commit -m "Added mixtape for ${network}" && git push`, (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Error: ${error.message}`);
-                return reject(error);
-            }
-            if (stderr) {
-                console.error(`Stderr: ${stderr}`);
-                return reject(stderr);
-            }
-            console.log(`Stdout: ${stdout}`);
-            resolve(stdout);
-        });
-    }).catch((error) => {
-        console.error(`Error pushing to GitHub: ${error.message}`);
-    });
 };
 
 // Run for Ethereum, then wait 15 minutes and run for Polygon
