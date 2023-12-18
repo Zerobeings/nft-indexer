@@ -93,12 +93,10 @@ const getIPFSUrl = (url) => {
   return `${gateway}${CID}`;
 };
 
-const getContractURI = async (contractAddress, tokenId, provider) => {
+const getContractURI = async (contractAddress, tokenId, provider, providerI) => {
   const contract = new ethers.Contract(contractAddress, [
     'function tokenURI(uint256 tokenId) external view returns (string memory)'
   ], provider);
-
-  providerI = new ethers.JsonRpcProvider(process.env.INFURA_URL);
 
   abiSpecial = [
     'function tokenURI(uint256 tokenId) view returns (string)'
@@ -131,6 +129,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   console.log(`Creating mixtape for ${contractAddress}...${network}`);
 
   let provider;
+  let providerI;
 
   switch (network) {
     case 'polygon':
@@ -138,6 +137,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
       break;
     case 'ethereum':
       provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
+      providerI = new ethers.JsonRpcProvider(process.env.INFURA_URL);
       break;
     default:
       throw new Error(`Unsupported network: ${network}`);
@@ -166,7 +166,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
     let metadata;
     while (!success && attempts < 15) {
         try {
-            const uri = await getContractURI(contractAddress, tokenId, provider);
+            const uri = await getContractURI(contractAddress, tokenId, provider, providerI);
             const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
             console.log(`Fetching metadata for token ${tokenId}`);
 
