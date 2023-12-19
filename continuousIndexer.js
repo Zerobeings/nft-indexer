@@ -93,7 +93,7 @@ const getIPFSUrl = (url) => {
   return `${gateway}${CID}`;
 };
 
-const getContractURI = async (contractAddress, tokenId, provider, providerI) => {
+const getContractURI = async (contractAddress, tokenId, provider, providerI, network) => {
 
     if (network === 'ethereum') {
     const contract = new ethers.Contract(contractAddress, [
@@ -173,7 +173,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
     let metadata;
     while (!success && attempts < 15) {
         try {
-            const uri = await getContractURI(contractAddress, tokenId, provider, providerI);
+            const uri = await getContractURI(contractAddress, tokenId, provider, providerI, network);
             const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
             console.log(`Fetching metadata for token ${tokenId}`);
 
