@@ -293,8 +293,8 @@ const runScriptForNetwork = async (network) => {
 };
 
 // Run for Ethereum, then wait 15 minutes and run for Polygon
-runScriptForNetwork('polygon').then(() => {
-    setTimeout(() => runScriptForNetwork('ethereum'), delay);
+runScriptForNetwork('ethereum').then(() => {
+    setTimeout(() => runScriptForNetwork('polygon'), delay);
 });
 
 module.exports = { updateIndexedCollections, fetchDataFromRequest, runScriptForNetwork };
