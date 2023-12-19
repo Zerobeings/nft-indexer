@@ -97,17 +97,16 @@ const getContractURI = async (contractAddress, tokenId, provider, providerI, net
     let abiSpecial;
     console.log(network)
     if (network === 'ethereum') {
-    const contract = new ethers.Contract(contractAddress, [
-      'function tokenURI(uint256 tokenId) external view returns (string memory)'
-    ], provider);
+      var contract = new ethers.Contract(contractAddress, [
+        'function tokenURI(uint256 tokenId) external view returns (string memory)'
+      ], provider);
 
-    abiSpecial = [
-      'function tokenURI(uint256 tokenId) view returns (string)'
-    ];
-
-    const contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
+      abiSpecial = [
+        'function tokenURI(uint256 tokenId) view returns (string)'
+      ];
+      var contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
   } else {
-    const contract = new ethers.Contract(contractAddress, [
+    var contract = new ethers.Contract(contractAddress, [
       'function uri(uint256 tokenId) external view returns (string memory)'
     ], provider);
   }
