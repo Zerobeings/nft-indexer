@@ -94,7 +94,8 @@ const getIPFSUrl = (url) => {
 };
 
 const getContractURI = async (contractAddress, tokenId, provider, providerI, network) => {
-
+    let abiSpecial;
+    console.log(network)
     if (network === 'ethereum') {
     const contract = new ethers.Contract(contractAddress, [
       'function tokenURI(uint256 tokenId) external view returns (string memory)'
