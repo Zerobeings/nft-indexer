@@ -246,22 +246,29 @@ const pushToGitHub = (network) => {
 
 const runScriptForNetwork = async (network) => {
     console.log(`Running script for the ${network} network...`);
+    let changesMade = false;
     // Fetch data from the sheet
     const data = await fetchDataFromRequest(network);
     // Loop through the data and process it
     for (const item of data) {
         // Check if the folder exists
         if (!checkIfFolderExists(item.contractAddress, network)) {
+            changesMade = true;
             // If not, update collections and create mixtape
             await updateIndexedCollections(item.contractAddress, network);
             await createMixtapeForContract(item.contractAddress, item.startToken, item.endToken, network);
         }
     }
     // After mixtape creation is complete
-    try {
-      await pushToGitHub(network);
-    } catch (error) {
-      console.error(`Error pushing to GitHub: ${error.message}`);
+    if (changesMade) {
+        // Push to GitHub
+        try {
+          await pushToGitHub(network);
+        } catch (error) {
+          console.error(`Error pushing to GitHub: ${error.message}`);
+        }
+    } else {
+        console.log(`No changes made for ${network} network.`);
     }
 };
 
