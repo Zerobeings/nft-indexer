@@ -97,29 +97,42 @@ const getContractURI = async (contractAddress, tokenId, provider, providerI, net
     let abiSpecial;
     console.log(network)
     if (network === 'ethereum') {
-      var contract = new ethers.Contract(contractAddress, [
+      const contract = new ethers.Contract(contractAddress, [
         'function tokenURI(uint256 tokenId) external view returns (string memory)'
       ], provider);
 
       abiSpecial = [
         'function tokenURI(uint256 tokenId) view returns (string)'
       ];
-      var contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
+      const contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
+
+      try {
+        return await contract.tokenURI(tokenId);
+      } catch (error) {
+        try {
+          return await contractSpecial.tokenURI(tokenId);
+        } catch (error) {
+          console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+        }
+      }
+
   } else {
-    var contract = new ethers.Contract(contractAddress, [
+    const contract = new ethers.Contract(contractAddress, [
       'function uri(uint256 tokenId) external view returns (string memory)'
     ], provider);
-  }
 
-  try {
-    return await contract.tokenURI(tokenId);
-  } catch (error) {
     try {
-      return await contractSpecial.tokenURI(tokenId);
+      return await contract.uri(tokenId);
     } catch (error) {
-      console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+      try {
+        return await contractSpecial.uri(tokenId);
+      } catch (error) {
+        console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+      }
     }
   }
+
+
 };
 
 const parseDataUri = (dataUri) => {
