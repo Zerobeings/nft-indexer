@@ -94,15 +94,22 @@ const getIPFSUrl = (url) => {
 };
 
 const getContractURI = async (contractAddress, tokenId, provider, providerI) => {
-  const contract = new ethers.Contract(contractAddress, [
-    'function tokenURI(uint256 tokenId) external view returns (string memory)'
-  ], provider);
 
-  abiSpecial = [
-    'function tokenURI(uint256 tokenId) view returns (string)'
-  ];
+    if (network === 'ethereum') {
+    const contract = new ethers.Contract(contractAddress, [
+      'function tokenURI(uint256 tokenId) external view returns (string memory)'
+    ], provider);
 
-  const contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
+    abiSpecial = [
+      'function tokenURI(uint256 tokenId) view returns (string)'
+    ];
+
+    const contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
+  } else {
+    const contract = new ethers.Contract(contractAddress, [
+      'function uri(uint256 tokenId) external view returns (string memory)'
+    ], provider);
+  }
 
   try {
     return await contract.tokenURI(tokenId);
@@ -133,7 +140,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
 
   switch (network) {
     case 'polygon':
-      provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
+      provider = new ethers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
       break;
     case 'ethereum':
       provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
@@ -273,8 +280,8 @@ const runScriptForNetwork = async (network) => {
 };
 
 // Run for Ethereum, then wait 15 minutes and run for Polygon
-runScriptForNetwork('ethereum').then(() => {
-    setTimeout(() => runScriptForNetwork('polygon'), delay);
+runScriptForNetwork('polygon').then(() => {
+    setTimeout(() => runScriptForNetwork('ethereum'), delay);
 });
 
 module.exports = { updateIndexedCollections, fetchDataFromRequest, runScriptForNetwork };
