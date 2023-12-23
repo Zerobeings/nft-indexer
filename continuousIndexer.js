@@ -10,13 +10,6 @@ const { exec } = require('child_process');
 const mixtape = new Mixtape();
 require('dotenv').config();
 
-const ipfsGateways = [
-  'https://ipfs.io/ipfs/',
-  'https://dweb.link/ipfs/',
-];
-
-let currentGatewayIndex = 0;
-
 async function updateIndexedCollections(contractAddress, network){
   try {
       // Determine the correct directory based on the network
@@ -61,12 +54,6 @@ const checkIfFolderExists = (contractAddress, network) => {
   }
   const folderPath = path.join(directoryPath, contractAddress);
   return fs.existsSync(folderPath);
-};
-
-const getNextIPFSGateway = () => {
-  const gateway = ipfsGateways[currentGatewayIndex];
-  currentGatewayIndex = (currentGatewayIndex + 1) % ipfsGateways.length;
-  return gateway;
 };
 
 const fetchWithTimeout = async (url, timeout = 10000) => {
