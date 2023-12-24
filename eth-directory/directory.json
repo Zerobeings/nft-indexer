@@ -70,5 +70,11 @@
     "name": "LilPudgys",
     "symbol": "LP",
     "image": "https://api.pudgypenguins.io/lil/image/1"
+  },
+  {
+    "contract": "0x5B6438089D0bb7Fca8218B9A56F241d1E313719C",
+    "name": "Robot Feelings",
+    "symbol": "RF",
+    "image": "ipfs://QmSU3Cuz4K47voLt3sGo35adcirZ9kqDbjakiU5YtGq72Z/1.png"
   }
 ]
