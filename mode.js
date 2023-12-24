@@ -17,5 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('dark-mode');
     iconSun.classList.toggle('hidden');
     iconMoon.classList.toggle('hidden');
-}
+    }
 );
