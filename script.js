@@ -15,14 +15,14 @@ function openNetwork(networkName) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const ethereumTab = document.getElementById('ethereum');
-    const polygonTab = document.getElementById('polygon');
+    const ethereumTab = document.getElementById('ethereumTab');
+    const polygonTab = document.getElementById('polygonTab');
 
-    ethereumTab.addEventListener('click', () => openNetwork('ethereum'));
-    polygonTab.addEventListener('click', () => openNetwork('polygon'));
+    ethereumTab.addEventListener('click', () => openNetwork('Ethereum'));
+    polygonTab.addEventListener('click', () => openNetwork('Polygon'));
 
     // Initial load
-    openNetwork('ethereum');
+    openNetwork('Ethereum');
 });
 
 
