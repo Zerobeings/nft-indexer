@@ -48,12 +48,8 @@ function createCard(data) {
     card.innerHTML = `
         <div class="title">${data.name}</div>
         <div class="symbol">${data.symbol}</div>
-        <div class="contract-address">${truncateAddress(data.contract)}</div>
+        <div class="contract-address">${data.contract}</div>
     `;
 
     return card;
-}
-
-function truncateAddress(address) {
-    return address.length > 20 ? address.substring(0, 10) + '...' + address.substring(address.length - 10) : address;
 }
