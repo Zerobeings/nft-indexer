@@ -69,6 +69,11 @@ body {
 }
 
 /* Dark mode styles */
+
+h1.dark-mode {
+    color: #fff;
+}
+
 body.dark-mode {
     background-color: #333;
     color: #fff;
@@ -98,6 +103,10 @@ body.dark-mode .tabcontent {
 
 body.dark-mode .card {
     background-color: #555;
+    color: #fff;
+}
+
+body.dark-mode .card .title .contract-address {
     color: #fff;
 }
 

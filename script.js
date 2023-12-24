@@ -12,6 +12,8 @@ function openNetwork(networkName) {
     document.getElementById(networkName).classList.add("shown");
     document.getElementById(networkName).classList.remove("hidden");
     document.getElementById(networkName.toLowerCase() + 'Tab').classList.add("active");
+
+    loadData(networkName);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
