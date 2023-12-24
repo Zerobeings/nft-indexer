@@ -1,0 +1,117 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.card {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.card .title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card .symbol {
+    font-size: 16px;
+    color: grey;
+    margin-bottom: 10px;
+}
+
+.card .contract-address {
+    font-size: 14px;
+    color: #555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Dark mode styles */
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+body.dark-mode .tab {
+    background-color: #444;
+    border: 1px solid #666;
+}
+
+body.dark-mode .tab button {
+    color: #fff;
+}
+
+body.dark-mode .tab button:hover {
+    background-color: #555;
+}
+
+body.dark-mode .tab button.active {
+    background-color: #666;
+}
+
+body.dark-mode .tabcontent {
+    background-color: #444;
+    border: 1px solid #666;
+}
+
+body.dark-mode .card {
+    background-color: #555;
+    color: #fff;
+}
+
+#darkModeToggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #555; /* Default color for light mode */
+}
+
+body.dark-mode #darkModeToggle {
+    color: #fff; /* Color for dark mode */
+}
