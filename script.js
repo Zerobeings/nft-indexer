@@ -11,7 +11,7 @@ function openNetwork(networkName) {
     }
     document.getElementById(networkName).classList.add("shown");
     document.getElementById(networkName).classList.remove("hidden");
-    document.getElementById(networkName + 'Tab').classList.add("active");
+    document.getElementById(networkName.toLowerCase() + 'Tab').classList.add("active");
 }
 
 document.addEventListener('DOMContentLoaded', () => {
