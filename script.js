@@ -1,4 +1,16 @@
-function openNetwork(evt, networkName) {
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach event listeners to tab buttons
+    const ethereumTab = document.getElementById('ethereumTab');
+    const polygonTab = document.getElementById('polygonTab');
+
+    ethereumTab.addEventListener('click', () => openNetwork('Ethereum'));
+    polygonTab.addEventListener('click', () => openNetwork('Polygon'));
+
+    // Initial load
+    openNetwork('Ethereum');
+});
+
+function openNetwork(networkName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -9,7 +21,7 @@ function openNetwork(evt, networkName) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
     document.getElementById(networkName).style.display = "block";
-    evt.currentTarget.className += " active";
+    document.getElementById(networkName + 'Tab').className += " active";
 
     // Load data for the selected network
     loadData(networkName);
@@ -45,6 +57,3 @@ function createCard(data) {
 function truncateAddress(address) {
     return address.length > 20 ? address.substring(0, 10) + '...' + address.substring(address.length - 10) : address;
 }
-
-// Initial load
-openNetwork({ currentTarget: document.getElementsByClassName("tablinks")[0] }, 'Ethereum');
