@@ -70,7 +70,7 @@ body {
 
 /* Dark mode styles */
 
-h1.dark-mode {
+body.dark-mode h1 {
     color: #fff;
 }
 
@@ -106,7 +106,7 @@ body.dark-mode .card {
     color: #fff;
 }
 
-body.dark-mode .card .title .contract-address {
+body.dark-mode .contract-address {
     color: #fff;
 }
 
