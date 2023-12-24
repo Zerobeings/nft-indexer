@@ -1,0 +1,74 @@
+[
+  {
+    "contract": "0x8f170F73076b7A45749677B1681b13366B3C80f7",
+    "name": "Hexagonal Zero",
+    "symbol": "HEXZ",
+    "image": "ipfs://QmeV9C1VmJDJ7jCLy8GUwqhrRRj3VVxzood31pEyyWZtnw/001.png"
+  },
+  {
+    "contract": "0x8FbA3ebe77D3371406a77EEaf40c89C1Ed55364a",
+    "name": "Zero Beings",
+    "symbol": "ZERB",
+    "image": "ipfs://bafybeihvhk34lgwoh42qjkvz6obyeyls3236s5gojjukw3sq6ommg2eaye/00001.png"
+  },
+  {
+    "contract": "0xB6C29b68FEcedbf005743C3EAf5139328B651Deb",
+    "name": "Warp Crystals",
+    "symbol": "WARPC",
+    "image": "ipfs://bafybeigkbth3dg7wvzphjl46cvxfmzsogiuvii6fflcb2wsmyv3uirga6q/00001.png"
+  },
+  {
+    "contract": "0xe785E82358879F061BC3dcAC6f0444462D4b5330",
+    "name": "World Of Women",
+    "symbol": "WOW",
+    "image": "ipfs://QmSdv72GwEDFoCspXJN7Bki9UzDyTsmbAd8zoRtMHjW3qT"
+  },
+  {
+    "contract": "0xd9b78A2F1dAFc8Bb9c60961790d2beefEBEE56f4",
+    "name": "tiny dinos",
+    "symbol": "dino",
+    "image": "ipfs://QmVCLxmzMstWpnCE2caF3AfRNEJmdiA6Z6a8BECnXqd98r/1.png"
+  },
+  {
+    "contract": "0xC9d198089D6c31d0Ca5Cc5B92C97a57A97BBfdE2",
+    "name": "Space Riders",
+    "symbol": "SPR",
+    "image": "ipfs://QmYCXBMG4BMuoXxkHbGR2GpmJPySJH4HDLMU9eDZkYUNjd/1.png"
+  },
+  {
+    "contract": "0xBd3531dA5CF5857e7CfAA92426877b022e612cf8",
+    "name": "PudgyPenguins",
+    "symbol": "PPG",
+    "image": "ipfs://QmNf1UsmdGaMbpatQ6toXSkzDpizaGmC9zfunCyoz1enD5/penguin/1.png"
+  },
+  {
+    "contract": "0x878586dA1ed007A4D19DE3e7A59eCa98814e2808",
+    "name": "Imaginary Rides",
+    "symbol": "IR",
+    "image": "https://assets.imaginaryones.com/rides/gif/1.gif"
+  },
+  {
+    "contract": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+    "name": "BoredApeYachtClub",
+    "symbol": "BAYC",
+    "image": "ipfs://QmPbxeGcXhYQQNgsC6a36dDyYUcHgMLnGKnF8pVFmGsvqi"
+  },
+  {
+    "contract": "0xd9E49f550d0F605e3cCEE3167eC14ee7a9134DdB",
+    "name": "Sidenoun",
+    "symbol": "SDN",
+    "image": "ipfs://QmcQ25aoiniFxWxfCKgXTMnLLjWYwyWLXTWAN7x1fLMqaQ/1.gif"
+  },
+  {
+    "contract": "0xED5AF388653567Af2F388E6224dC7C4b3241C544",
+    "name": "Azuki",
+    "symbol": "AZUKI",
+    "image": "ipfs://QmYDvPAXtiJg7s8JdRBSLWdgSphQdac8j1YuQNNxcGE1hg/1.png"
+  },
+  {
+    "contract": "0x524cAB2ec69124574082676e6F654a18df49A048",
+    "name": "LilPudgys",
+    "symbol": "LP",
+    "image": "https://api.pudgypenguins.io/lil/image/1"
+  }
+]
