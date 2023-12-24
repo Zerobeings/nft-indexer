@@ -115,3 +115,11 @@ body.dark-mode .card {
 body.dark-mode #darkModeToggle {
     color: #fff; /* Color for dark mode */
 }
+
+.hidden {
+    display: none;
+}
+
+.shown {
+    display: block;
+}

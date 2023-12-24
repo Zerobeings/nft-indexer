@@ -1,31 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Attach event listeners to tab buttons
-    const ethereumTab = document.getElementById('ethereumTab');
-    const polygonTab = document.getElementById('polygonTab');
-
-    ethereumTab.addEventListener('click', () => openNetwork('Ethereum'));
-    polygonTab.addEventListener('click', () => openNetwork('Polygon'));
-
-    // Initial load
-    openNetwork('Ethereum');
-});
-
 function openNetwork(networkName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
+        tabcontent[i].classList.add("hidden");
+        tabcontent[i].classList.remove("shown");
     }
     tablinks = document.getElementsByClassName("tablinks");
     for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
+        tablinks[i].classList.remove("active");
     }
-    document.getElementById(networkName).style.display = "block";
-    document.getElementById(networkName + 'Tab').className += " active";
-
-    // Load data for the selected network
-    loadData(networkName);
+    document.getElementById(networkName).classList.add("shown");
+    document.getElementById(networkName).classList.remove("hidden");
+    document.getElementById(networkName + 'Tab').classList.add("active");
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const ethereumTab = document.getElementById('ethereum');
+    const polygonTab = document.getElementById('polygon');
+
+    ethereumTab.addEventListener('click', () => openNetwork('ethereum'));
+    polygonTab.addEventListener('click', () => openNetwork('polygon'));
+
+    // Initial load
+    openNetwork('ethereum');
+});
+
 
 // Load data from JSON and create cards
 async function loadData(network) {
@@ -44,7 +43,6 @@ async function loadData(network) {
 function createCard(data) {
     const card = document.createElement('div');
     card.className = 'card';
-    // <img src="${data.image}" alt="${data.name}">
     card.innerHTML = `
         <div class="title">${data.name}</div>
         <div class="symbol">${data.symbol}</div>
