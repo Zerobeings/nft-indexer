@@ -9,6 +9,8 @@ const pipeline = promisify(require('stream').pipeline);
 const { exec } = require('child_process');
 const mixtape = new Mixtape();
 require('dotenv').config();
+const ethDirectory = require('./ethDirectory');
+const polyDirectory = require('./polyDirectory');
 
 async function updateIndexedCollections(contractAddress, network){
   try {
@@ -224,7 +226,13 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
             }
         }
     }
-}
+  }
+
+    if (network === 'ethereum') {
+      await ethDirectory.fetchAllMetadata();
+    } else if (network === 'polygon') {
+      await polyDirectory.fetchAllMetadata();
+    }
 
   console.log(`Finished fetching all tokens for ${contractAddress}.`);
 };
