@@ -193,7 +193,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
                 const response = await fetchWithTimeout(url);
                 const responseText = await response.text();
                 metadata = JSON.parse(responseText); // Parse the response text into JSON
-                metadata.image = metadata.image.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/');
+                metadata.image = metadata.image.replace('https://gateway.pinata.cloud/ipfs/', 'ipfs://');
               } catch (error) {
                 console.error(`Error fetching from Pinata: ${error.message}`);
               }
