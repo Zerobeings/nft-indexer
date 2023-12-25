@@ -88,11 +88,5 @@
     "name": "The Randoms",
     "symbol": "RNDMS",
     "image": "ipfs://QmWs5SNwXrU5Nyiiwua8CjHr2MyPcxeeyCersRYekA4XN3/1.png"
-  },
-  {
-    "contract": "0x614917F589593189ac27aC8B81064CBe450C35e3",
-    "name": "Letters",
-    "symbol": "LETTERS",
-    "image": "https://gateway.pinata.cloud/ipfs/QmPjJZcVVBtcDvF5b2MXGRcVMRFUr9epjGwtMxwh3QCB39/Homemade_Holiday.png"
   }
 ]

@@ -193,6 +193,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
                 const response = await fetchWithTimeout(url);
                 const responseText = await response.text();
                 metadata = JSON.parse(responseText); // Parse the response text into JSON
+                metadata.image = metadata.image.replace('ipfs://', 'https://gateway.pinata.cloud/ipfs/');
               } catch (error) {
                 console.error(`Error fetching from Pinata: ${error.message}`);
               }
@@ -299,20 +300,20 @@ const runScriptForNetwork = async (network) => {
           console.error(`Error pushing to GitHub: ${error.message}`);
         }
 
-        // // Update directory
-        // if (network === 'ethereum') {
-        //   try {
-        //     await ethDirectory.fetchAllMetadata();
-        //   } catch (error) {
-        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-        //   }
-        // } else if (network === 'polygon') {
-        //   try {
-        //     await polyDirectory.fetchAllMetadata();
-        //   } catch (error) {
-        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-        //   }
-        // }
+        // Update directory
+        if (network === 'ethereum') {
+          try {
+            await ethDirectory.fetchAllMetadata();
+          } catch (error) {
+            console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+          }
+        } else if (network === 'polygon') {
+          try {
+            await polyDirectory.fetchAllMetadata();
+          } catch (error) {
+            console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+          }
+        }
     } else {
         console.log(`No changes made for ${network} network.`);
     }
