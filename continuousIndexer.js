@@ -250,20 +250,6 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
     }
   }
 
-    if (network === 'ethereum') {
-      try {
-        await ethDirectory.fetchAllMetadata();
-      } catch (error) {
-        console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-      }
-    } else if (network === 'polygon') {
-      try {
-        await polyDirectory.fetchAllMetadata();
-      } catch (error) {
-        console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-      }
-    }
-
   console.log(`Finished fetching all tokens for ${contractAddress}.`);
 };
 
@@ -312,6 +298,21 @@ const runScriptForNetwork = async (network) => {
         } catch (error) {
           console.error(`Error pushing to GitHub: ${error.message}`);
         }
+
+        // // Update directory
+        // if (network === 'ethereum') {
+        //   try {
+        //     await ethDirectory.fetchAllMetadata();
+        //   } catch (error) {
+        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+        //   }
+        // } else if (network === 'polygon') {
+        //   try {
+        //     await polyDirectory.fetchAllMetadata();
+        //   } catch (error) {
+        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+        //   }
+        // }
     } else {
         console.log(`No changes made for ${network} network.`);
     }
