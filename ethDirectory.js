@@ -68,3 +68,5 @@ async function fetchAllMetadata() {
 }
 
 fetchAllMetadata();
+
+module.exports = {fetchAllMetadata};
