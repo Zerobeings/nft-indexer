@@ -82,5 +82,11 @@
     "name": "DOOM",
     "symbol": "DOOM",
     "image": "ipfs://bafybeifmjqa4dm4q4kptwwvulxic3vsjjmuvmlqplnkolcam3p2sf7o3ye/1.png"
+  },
+  {
+    "contract": "0x79Aa05963c92A2a10d96bD840Eb5e73a1E675E92",
+    "name": "The Randoms",
+    "symbol": "RNDMS",
+    "image": "ipfs://QmWs5SNwXrU5Nyiiwua8CjHr2MyPcxeeyCersRYekA4XN3/1.png"
   }
 ]
