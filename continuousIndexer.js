@@ -1,5 +1,6 @@
 const Mixtape = require('mixtapejs');
 const fetch = require('cross-fetch');
+const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const { ethers } = require('ethers');
@@ -186,14 +187,30 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
 
             if (uri.startsWith('data:application/json')) {
                 metadata = parseDataUri(uri);
+            } else if (uri.startsWith('https://gateway.pinata.cloud/ipfs/')) {
+              try {
+                url = uri.replace('https://gateway.pinata.cloud/ipfs/', 'https://ipfs.io/ipfs/');
+                const response = await fetchWithTimeout(url);
+                const responseText = await response.text();
+                metadata = JSON.parse(responseText); // Parse the response text into JSON
+              } catch (error) {
+                console.error(`Error fetching from Pinata: ${error.message}`);
+              }
             } else if (uri.startsWith('https://')) {
               try {
                 const response = await fetchWithTimeout(uri);
                 const responseText = await response.text();
                 metadata = JSON.parse(responseText); // Parse the response text into JSON
               } catch (error) {
-                console.error(`Error fetching from: ${error.message}`);
-              }     
+                console.error(`Error fetching without json extension from: ${error.message}`);
+                try {
+                  const response = await fetchWithTimeout(`${uri}.json`);
+                  const responseText = await response.text();
+                  metadata = JSON.parse(responseText); // Parse the response text into JSON
+                } catch (error) {
+                  console.error(`Error fetching with json extension from: ${error.message}`);
+                }     
+              }
             } else {
                 try {
                   const responseWithExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}.json`);
@@ -234,9 +251,17 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   }
 
     if (network === 'ethereum') {
-      await ethDirectory.fetchAllMetadata();
+      try {
+        await ethDirectory.fetchAllMetadata();
+      } catch (error) {
+        console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+      }
     } else if (network === 'polygon') {
-      await polyDirectory.fetchAllMetadata();
+      try {
+        await polyDirectory.fetchAllMetadata();
+      } catch (error) {
+        console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+      }
     }
 
   console.log(`Finished fetching all tokens for ${contractAddress}.`);
