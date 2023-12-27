@@ -94,5 +94,11 @@
     "name": "Letters",
     "symbol": "LETTERS",
     "image": "ipfs://QmPjJZcVVBtcDvF5b2MXGRcVMRFUr9epjGwtMxwh3QCB39/Homemade_Holiday.png"
+  },
+  {
+    "contract": "0x9aBa43dA6a7f7E51Fcb253ccE636d4E25A65Fa83",
+    "name": "Modern Anteeks",
+    "symbol": "Anteeks",
+    "image": "ipfs://bafybeidijnhuq6taxm7o5a5lhuo7jgyo7a5zieysboafelvhm6j4bvitoi/0001.png"
   }
 ]
