@@ -86,7 +86,7 @@ const getIPFSUrl = (url) => {
 const getContractURI = async (contractAddress, tokenId, provider,
    //providerI, 
    network) => {
-    let abiSpecial;
+    // let abiSpecial;
     console.log(network)
     if (network === 'ethereum') {
       const contract = new ethers.Contract(contractAddress, [
@@ -259,20 +259,30 @@ const delay = 15 * 60 * 1000; // 15 minutes in milliseconds
 
 const pushToGitHub = (network) => {
   return new Promise((resolve, reject) => {
-      exec(`git add . && git commit -m "Added mixtape for ${network}" && git push`, (error, stdout, stderr) => {
-          if (error) {
-              console.error(`Error: ${error.message}`);
-              return reject(error);
-          }
-          if (stderr) {
-              console.error(`Stderr: ${stderr}`);
-              return reject(stderr);
-          }
-          console.log(`Stdout: ${stdout}`);
-          resolve(stdout);
+    exec(`git add . && git commit -m "Added mixtape for ${network}"`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Git commit error: ${error.message}`);
+        return reject(error);
+      }
+      if (stderr) {
+        console.log(`Git commit status: ${stderr}`);
+      }
+      console.log(`Git commit output: ${stdout}`);
+
+      exec(`git push`, (pushError, pushStdout, pushStderr) => {
+        if (pushError) {
+          console.error(`Git push error: ${pushError.message}`);
+          return reject(pushError);
+        }
+        if (pushStderr) {
+          console.log(`Git push status: ${pushStderr}`);
+        }
+        console.log(`Git push output: ${pushStdout}`);
+        resolve(pushStdout);
       });
+    });
   }).catch((error) => {
-      console.error(`Error pushing to GitHub: ${error.message}`);
+    console.error(`Error pushing to GitHub: ${error.message}`);
   });
 };
 
