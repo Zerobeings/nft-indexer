@@ -304,11 +304,11 @@ const runScriptForNetwork = async (network) => {
     // After mixtape creation is complete
     if (changesMade) {
         // Push to GitHub
-        try {
-          await pushToGitHub(network);
-        } catch (error) {
-          console.error(`Error pushing to GitHub: ${error.message}`);
-        }
+        // try {
+        //   await pushToGitHub(network);
+        // } catch (error) {
+        //   console.error(`Error pushing to GitHub: ${error.message}`);
+        // }
 
         // Update directory
         if (network === 'ethereum') {

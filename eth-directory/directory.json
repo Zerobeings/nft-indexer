@@ -100,5 +100,11 @@
     "name": "Modern Anteeks",
     "symbol": "Anteeks",
     "image": "ipfs://bafybeidijnhuq6taxm7o5a5lhuo7jgyo7a5zieysboafelvhm6j4bvitoi/0001.png"
+  },
+  {
+    "contract": "0xBE4Bef8735107db540De269FF82c7dE9ef68C51b",
+    "name": "FreshFrogsNFT",
+    "symbol": "FROG",
+    "image": "ipfs://QmdzLTSiyWAbTJRujCA9JH5DcW2QXPk1efEePAN8Nfd6mv/1.png"
   }
 ]
