@@ -1,4 +1,4 @@
-const Mixtape = require('mixtapejs');
+const Mixtape = require('nft-mixtapejs');
 const fetch = require('cross-fetch');
 const mixtape = new Mixtape();
 
