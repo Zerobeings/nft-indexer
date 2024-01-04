@@ -14,8 +14,8 @@ const mixtape = new Mixtape();
 require('dotenv').config();
 const ethDirectory = require('./ethDirectory');
 const polyDirectory = require('./polyDirectory');
-const avaxDirectory = require('./avaxDirectory');
-const ftmDirectory = require('./ftmDirectory');
+// const avaxDirectory = require('./avaxDirectory');
+// const ftmDirectory = require('./ftmDirectory');
 
 async function updateIndexedCollections(contractAddress, network){
   try {
@@ -43,9 +43,6 @@ async function updateIndexedCollections(contractAddress, network){
 
       // Initialize indexedCollections
       let indexedCollections = {};
-
-      // Batch size for fetching tokens
-      const batchSize = 100;
 
       // Check if the file exists and read the existing data
       if (fs.existsSync(filePath)) {
@@ -188,6 +185,7 @@ const parseDataUri = (dataUri) => {
               }
             } else if (uri.startsWith('https://')) {
               try {
+                console.log(`Fetching with https from: ${uri}`);
                 const response = await fetchWithTimeout(uri);
                 const responseText = await response.text();
                 metadata = JSON.parse(responseText); // Parse the response text into JSON
@@ -267,6 +265,9 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
       metadata: { schema: "migrate" }
     }
   });
+
+  // Batch size for fetching tokens
+  const batchSize = 100;
 
   for (let batchStart = startToken; batchStart <= endToken; batchStart += batchSize) {
     const batchEnd = Math.min(batchStart + batchSize - 1, endToken);
@@ -353,20 +354,21 @@ const runScriptForNetwork = async (network) => {
           } catch (error) {
             console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
           }
-        } else if (network === 'avalanche') {
-          try {
-            await avaxDirectory.fetchAllMetadata();
-          } catch (error) {
-            console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-          }
-        }
-        else if (network === 'fantom') {
-          try {
-            await ftmDirectory.fetchAllMetadata();
-          } catch (error) {
-            console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-          }
-        }
+        } 
+        // else if (network === 'avalanche') {
+        //   try {
+        //     await avaxDirectory.fetchAllMetadata();
+        //   } catch (error) {
+        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+        //   }
+        // }
+        // else if (network === 'fantom') {
+        //   try {
+        //     await ftmDirectory.fetchAllMetadata();
+        //   } catch (error) {
+        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+        //   }
+        // }
 
         //Push to GitHub
         try {
@@ -381,7 +383,7 @@ const runScriptForNetwork = async (network) => {
 
 // Run for all networks in a loop
 function runScriptsInLoop() {
-  runScriptForNetwork('ethereum').then(() => {
+  runScriptForNetwork('fantom').then(() => {
       setTimeout(() => {
           runScriptForNetwork('polygon').then(() => {
               setTimeout(() => {
