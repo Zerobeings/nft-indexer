@@ -19,18 +19,58 @@ function openNetwork(networkName) {
 document.addEventListener('DOMContentLoaded', () => {
     const ethereumTab = document.getElementById('ethereumTab');
     const polygonTab = document.getElementById('polygonTab');
+    const avalancheTab = document.getElementById('avalancheTab');
+    const fantomTab = document.getElementById('fantomTab');
+    const twethereumTab = document.getElementById('twethereumTab');
+    const twpolygonTab = document.getElementById('twpolygonTab');
+    const twavalancheTab = document.getElementById('twavalancheTab');
+    const twfantomTab = document.getElementById('twfantomTab');
 
     ethereumTab.addEventListener('click', () => openNetwork('Ethereum'));
     polygonTab.addEventListener('click', () => openNetwork('Polygon'));
+    avalancheTab.addEventListener('click', () => openNetwork('Avalanche'));
+    fantomTab.addEventListener('click', () => openNetwork('Fantom'));
+    twethereumTab.addEventListener('click', () => openNetwork('twEthereum'));
+    twpolygonTab.addEventListener('click', () => openNetwork('twPolygon'));
+    twavalancheTab.addEventListener('click', () => openNetwork('twAvalanche'));
+    twfantomTab.addEventListener('click', () => openNetwork('twFantom'));
 
     // Initial load
     openNetwork('Ethereum');
 });
 
-
 // Load data from JSON and create cards
 async function loadData(network) {
-    const directoryPath = network === 'Ethereum' ? 'eth-directory/directory.json' : 'poly-directory/directory.json';
+    let directoryPath;
+    switch(network) {
+        case 'Ethereum':
+            directoryPath = 'eth-directory/directory.json';
+            break;
+        case 'Polygon':
+            directoryPath = 'poly-directory/directory.json';
+            break;
+        case 'Avalanche':
+            directoryPath = 'avax-directory/directory.json';
+            break;
+        case 'Fantom':
+            directoryPath = 'ftm-directory/directory.json';
+            break;
+        case 'twEthereum':
+            directoryPath = 'eth-directory/twdirectory.json';
+            break;
+        case 'twPolygon':
+            directoryPath = 'poly-directory/twdirectory.json';
+            break;
+        case 'twAvalanche':
+            directoryPath = 'avax-directory/twdirectory.json';
+            break;
+        case 'twFantom':
+            directoryPath = 'ftm-directory/twdirectory.json';
+            break;
+        default:
+            console.error(`Unknown network: ${network}`);
+            return;
+    }
     const response = await fetch(directoryPath);
     const data = await response.json();
 

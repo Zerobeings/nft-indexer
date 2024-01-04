@@ -9,13 +9,14 @@ darkModeToggle.addEventListener('click', () => {
 });
 
 // Initialize the correct icon
-iconSun.classList.toggle('hidden', document.body.classList.contains('dark-mode'));
-iconMoon.classList.toggle('hidden', !document.body.classList.contains('dark-mode'));
+iconSun.classList.toggle('hidden', !document.body.classList.contains('dark-mode'));
+iconMoon.classList.toggle('hidden', document.body.classList.contains('dark-mode'));
 
-// Inititialize with darkmode and hide the lightmode icon
+// Initialize with dark mode and show the sun icon
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.classList.toggle('dark-mode');
-    iconSun.classList.toggle('hidden');
-    iconMoon.classList.toggle('hidden');
+    if (!document.body.classList.contains('dark-mode')) {
+        document.body.classList.add('dark-mode');
+        iconSun.classList.remove('hidden');
+        iconMoon.classList.add('hidden');
     }
-);
+});
