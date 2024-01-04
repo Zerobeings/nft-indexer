@@ -68,8 +68,8 @@ async function loadData(network) {
             directoryPath = 'ftm-directory/twdirectory.json';
             break;
         default:
-            console.error(`Unknown network: ${network}`);
-            return;
+            directoryPath = 'eth-directory/directory.json';
+            break;
     }
     const response = await fetch(directoryPath);
     const data = await response.json();
