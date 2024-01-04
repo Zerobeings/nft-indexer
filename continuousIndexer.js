@@ -16,7 +16,25 @@ const polyDirectory = require('./polyDirectory');
 async function updateIndexedCollections(contractAddress, network){
   try {
       // Determine the correct directory based on the network
-      const dirPath = network === 'ethereum' ? 'eth-indexed' : 'poly-indexed';
+      let dirPath;
+
+      switch (network) {
+        case 'ethereum':
+          dirPath = 'eth-indexed';
+          break;
+        case 'polygon':
+          dirPath = 'poly-indexed';
+          break;
+        case 'avalanche':
+          dirPath = 'avax-indexed';
+          break;
+        case 'fantom':
+          dirPath = 'ftm-indexed';
+          break;
+        default:
+          throw new Error(`Unsupported network: ${network}`);
+      }
+
       const filePath = path.join(__dirname, dirPath, 'indexed.json');
 
       // Initialize indexedCollections
@@ -153,6 +171,12 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
     case 'ethereum':
       provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
       // providerI = new ethers.JsonRpcProvider(process.env.INFURA_URL);
+      break;
+    case 'avalanche':
+      provider = new ethers.JsonRpcProvider('https://avalanche.rpc.thirdweb.com');
+      break;
+    case 'fantom':
+      provider = new ethers.JsonRpcProvider('https://fantom.rpc.thirdweb.com');
       break;
     default:
       throw new Error(`Unsupported network: ${network}`);
