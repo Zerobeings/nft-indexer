@@ -224,7 +224,8 @@ const parseDataUri = (dataUri) => {
           }
         }
     }
-  }
+    return null; 
+  };
 
 
 const createMixtapeForContract = async ( contractAddress, startToken, endToken, network ) => {
@@ -267,7 +268,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   });
 
   // Batch size for fetching tokens
-  const batchSize = 100;
+  const batchSize = 10;
 
   for (let batchStart = startToken; batchStart <= endToken; batchStart += batchSize) {
     const batchEnd = Math.min(batchStart + batchSize - 1, endToken);
