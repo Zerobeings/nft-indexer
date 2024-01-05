@@ -384,7 +384,7 @@ const runScriptForNetwork = async (network) => {
 
 // Run for all networks in a loop
 function runScriptsInLoop() {
-  runScriptForNetwork('fantom').then(() => {
+  runScriptForNetwork('ethereum').then(() => {
       setTimeout(() => {
           runScriptForNetwork('polygon').then(() => {
               setTimeout(() => {

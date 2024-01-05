@@ -106,5 +106,11 @@
     "name": "FreshFrogsNFT",
     "symbol": "FROG",
     "image": "ipfs://QmdzLTSiyWAbTJRujCA9JH5DcW2QXPk1efEePAN8Nfd6mv/1.png"
+  },
+  {
+    "contract": "0xFd1b0b0dfa524E1fD42E7d51155A663c581bBd50",
+    "name": "y00ts",
+    "symbol": "y00t",
+    "image": "https://metadata.y00ts.com/y/1.png"
   }
 ]
