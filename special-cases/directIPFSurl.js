@@ -8,19 +8,6 @@ const { promisify } = require('util');
 const pipeline = promisify(require('stream').pipeline);
 const mixtape = new Mixtape();
 
-const ipfsGateways = [
-  'https://ipfs.io/ipfs/',
-  'https://dweb.link/ipfs/',
-];
-
-let currentGatewayIndex = 0;
-
-const getNextIPFSGateway = () => {
-  const gateway = ipfsGateways[currentGatewayIndex];
-  currentGatewayIndex = (currentGatewayIndex + 1) % ipfsGateways.length;
-  return gateway;
-};
-
 const fetchWithTimeout = async (url, timeout = 10000) => {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
@@ -41,7 +28,7 @@ const isIPFS = (url) => {
 
 const getIPFSUrl = (url) => {
   const CID = url.replace('ipfs://', '');
-  const gateway = getNextIPFSGateway();
+  const gateway = 'https://ipfs.io/ipfs/';
   return `${gateway}${CID}`;
 };
 
@@ -54,21 +41,19 @@ const getContractURI = async (contractAddress, tokenId, provider) => {
 };
 
 (async () => {
+  const network = readlineSync.question('Enter the network (polygon, ethereum, fantom, avalanche): ');
   const contractAddress = readlineSync.question('Enter the contract address: ');
   const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
   const endToken = parseInt(readlineSync.question('Enter the ending token ID: '), 10);
-  
+
   await mixtape.init({
-    path: path.join(__dirname, "ethereum", contractAddress), // switch network here
+    path: path.join(__dirname, network, contractAddress), // switch network here
     config: {
       metadata: { schema: "migrate" }
     }
   });
-
-  //const provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
-//   const provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
-//   const provider = new ethers.JsonRpcProvider('https://fantom.rpc.thirdweb.com');
-  const provider = new ethers.JsonRpcProvider('https://avalanche.rpc.thirdweb.com');
+  
+  const provider = new ethers.JsonRpcProvider(`https://${network}.rpc.thirdweb.com`);
 
 for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
   let success = false;
