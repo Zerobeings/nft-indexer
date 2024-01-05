@@ -124,5 +124,11 @@
     "name": "Poglin: Battle For Havens Destiny",
     "symbol": "POGLIN-1",
     "image": "https://lime-adorable-mongoose-591.mypinata.cloud/ipfs/QmcTFV7yR22Je7F3GUfms7gfn4LWghYaXJDAP4ad329Mek/1.gif"
+  },
+  {
+    "contract": "0xFd1b0b0dfa524E1fD42E7d51155A663c581bBd50",
+    "name": "y00ts",
+    "symbol": "y00t",
+    "image": "https://metadata.y00ts.com/y/1.png"
   }
 ]
