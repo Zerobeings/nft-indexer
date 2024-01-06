@@ -20,7 +20,7 @@ async function getContractMetadata(contractAddress) {
     try {
         const name = await contract.name();
         const symbol = await contract.symbol();
-        const tokenUri = await contract.tokenURI(0);
+        const tokenUri = await contract.tokenURI(1);
 
         // Fetch and parse token metadata
         let imageUrl = '';

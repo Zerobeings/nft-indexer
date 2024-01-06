@@ -10,5 +10,11 @@
     "name": "Happy Sun",
     "symbol": "HS",
     "image": "ipfs://QmcFvZwbUYVetVwbYCvmyubkvwGaR6wSmG7ctxNv317PvX/0.png"
+  },
+  {
+    "contract": "0x6aF53a162Deb0d3ABfd4F47Bd6c9615b08D553FD",
+    "name": "Doodleverse",
+    "symbol": "DOODLE",
+    "image": "ipfs://QmPjFnPpaimsFvx4HMi58JqTyzKgEL3o6VKi71suW8ndRG"
   }
 ]
