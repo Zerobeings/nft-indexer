@@ -10,8 +10,8 @@ const pipeline = promisify(require('stream').pipeline);
 const { exec } = require('child_process');
 const mixtape = new Mixtape();
 require('dotenv').config();
-const ethDirectory = require('./ethDirectory');
-const polyDirectory = require('./polyDirectory');
+const ethDirectory = require('../ethDirectory');
+const polyDirectory = require('../polyDirectory');
 
 async function updateIndexedCollections(contractAddress, network){
   try {
