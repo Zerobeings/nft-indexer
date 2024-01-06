@@ -26,7 +26,7 @@ async function getContractMetadata(contractAddress) {
         let imageUrl = '';
         if (tokenUri) {
             const tokenMetadataUrl = tokenUri.startsWith('ipfs://')
-                ? `https://ipfs.io/ipfs/${tokenUri.slice(7)}`
+                ? tokenUri.replace('ipfs://', 'https://ipfs.io/ipfs/')
                 : tokenUri;
 
             const tokenMetadataResponse = await axios.get(tokenMetadataUrl);
@@ -40,21 +40,22 @@ async function getContractMetadata(contractAddress) {
         console.error('Error fetching metadata for address:', contractAddress, error);
     }
 }
-
 // Function to fetch all metadata
 async function fetchAllMetadata() {
     let allMetadata = [];
+    let collectionAddresses = collections; // Already an array of addresses
 
-    // Read existing metadata file if it exists
+    // Try to read existing metadata file if it exists
     try {
-        const existingData = fs.readFileSync('avax-indexed/indexed.json');
-        allMetadata = JSON.parse(existingData);
+        const existingData = fs.readFileSync('avax-directory/directory.json', 'utf8');
+        allMetadata = JSON.parse(existingData); // This should be an array of metadata objects
+        console.log('Read existing metadata file');
     } catch (error) {
         console.error('Error reading existing metadata file:', error);
     }
 
     // Fetch new metadata
-    for (const address of collections) {
+    for (const address of collectionAddresses) {
         if (!allMetadata.some(entry => entry.contract === address)) {
             const metadata = await getContractMetadata(address);
             if (metadata) {
@@ -64,9 +65,9 @@ async function fetchAllMetadata() {
     }
 
     // Write updated metadata to file
-    fs.writeFileSync('avax-indexed/indexed.json', JSON.stringify(allMetadata, null, 2));
+    fs.writeFileSync('avax-directory/directory.json', JSON.stringify(allMetadata, null, 2));
 }
 
 fetchAllMetadata();
 
-module.exports = {fetchAllMetadata};
+module.exports = { fetchAllMetadata };
