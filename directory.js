@@ -116,6 +116,7 @@ async function fetchAllMetadata(network) {
 
     // Write updated metadata to file
     fs.writeFileSync(`${dirNetwork}-directory/directory.json`, JSON.stringify(allMetadata, null, 2));
+    fs.writeFileSync(`${dirNetwork}-directory/twdirectory.json`, JSON.stringify(allMetadata, null, 2));
 }
 
 module.exports = { fetchAllMetadata };
