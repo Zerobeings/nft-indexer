@@ -2,12 +2,6 @@ const { ethers } = require('ethers');
 const axios = require('axios');
 const fs = require('fs');
 
-// Read the JSON file containing contract addresses
-const fileData = fs.readFileSync('avax-indexed/indexed.json');
-const collections = JSON.parse(fileData).collections;
-
-let network;
-
 // Define a function to get contract metadata
 async function getContractMetadata(contractAddress, network, provider) {
 
@@ -97,7 +91,6 @@ async function fetchAllMetadata(network) {
     }
 
     let allMetadata = [];
-    let collectionAddresses = collections; // Already an array of addresses
 
     // Initialize ethers.js
     const provider = new ethers.JsonRpcProvider(`https://${network}.rpc.thirdweb.com`);
@@ -112,7 +105,7 @@ async function fetchAllMetadata(network) {
     }
 
     // Fetch new metadata
-    for (const address of collectionAddresses) {
+    for (const address of collections) {
         if (!allMetadata.some(entry => entry.contract === address)) {
             const metadata = await getContractMetadata(address, network, provider);
             if (metadata) {
@@ -124,7 +117,5 @@ async function fetchAllMetadata(network) {
     // Write updated metadata to file
     fs.writeFileSync(`${dirNetwork}-directory/directory.json`, JSON.stringify(allMetadata, null, 2));
 }
-
-fetchAllMetadata(network);
 
 module.exports = { fetchAllMetadata };
