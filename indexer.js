@@ -35,7 +35,6 @@ async function updateIndexedCollections(contractAddress, network){
       }
 
       const filePath = path.join(__dirname, dirPath, 'indexed.json');
-      const twFilePath = path.join(__dirname, dirPath, 'twindexed.json');
 
       // Initialize indexedCollections
       let indexedCollections = {};
@@ -56,7 +55,6 @@ async function updateIndexedCollections(contractAddress, network){
 
       // Write the updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(indexedCollections, null, 2));
-      fs.writeFileSync(twFilePath, JSON.stringify(indexedCollections, null, 2));
       console.log(`Updated indexed collections for ${network} network.`);
   } catch (error) {
       console.error(`An error occurred while updating indexed collections: ${error.message}`);
