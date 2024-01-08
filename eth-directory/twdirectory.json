@@ -136,5 +136,11 @@
     "name": "Night Vision Series",
     "symbol": "NVS",
     "image": "https://ipfs.io/ipfs/Qma5VJ3DBLppeZhFE7r1kncs8YX1pjBjJ8gL589fMqGZ2w/frame-000628.jpg"
+  },
+  {
+    "contract": "0x306b1ea3ecdf94aB739F1910bbda052Ed4A9f949",
+    "name": "Beanz",
+    "symbol": "BEANZ",
+    "image": "ipfs://QmTRuWHr7bpqscUWFmhXndzf5AdQqkekhqwgbyJCqKMHrL/1.png"
   }
 ]
