@@ -249,38 +249,34 @@ const pushToGitHub = (network) => {
 };
 
 const runScriptForNetwork = async (network) => {
-    console.log(`Running script for the ${network} network...`);
-    let changesMade = false;
-    // Fetch data from the sheet
-    const data = await fetchDataFromRequest(network);
-    // Loop through the data and process it
-    for (const item of data) {
-        // Check if the folder exists
-        if (!checkIfFolderExists(item.contractAddress, network)) {
-            changesMade = true;
-            // If not, update collections and create mixtape
-            await updateIndexedCollections(item.contractAddress, network);
-            await createMixtapeForContract(item.contractAddress, item.startToken, item.endToken, network);
-        }
-    }
-    // After mixtape creation is complete
-    if (changesMade) {
-      // Update directory
-      try {
-        await directory.fetchAllMetadata(network);
-      } catch (error) {
-        console.error(`Error writing for network: ${error.message}`);
-      }
+  console.log(`Running script for the ${network} network...`);
+  
+  // Fetch data from the sheet
+  const data = await fetchDataFromRequest(network);
+  
+  // Loop through the data and process it
+  for (const item of data) {
+      // Check if the folder exists
+      if (!checkIfFolderExists(item.contractAddress, network)) {
+          // If not, update collections and create mixtape
+          await updateIndexedCollections(item.contractAddress, network);
+          await createMixtapeForContract(item.contractAddress, item.startToken, item.endToken, network);
+          
+          // Update directory
+          try {
+              await directory.fetchAllMetadata(network);
+          } catch (error) {
+              console.error(`Error writing for network: ${error.message}`);
+          }
 
-      //Push to GitHub
-      try {
-        await pushToGitHub(network);
-      } catch (error) {
-        console.error(`Error pushing to GitHub: ${error.message}`);
+          // Push to GitHub for each collection
+          try {
+              await pushToGitHub(network);
+          } catch (error) {
+              console.error(`Error pushing to GitHub: ${error.message}`);
+          }
       }
-    } else {
-      console.log(`No changes made for ${network} network.`);
-    }
+  }
 };
 
 const delay = 1 * 60 * 1000; // 1 minutes in milliseconds
