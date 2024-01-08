@@ -1,7 +1,7 @@
 // Usage: node mixtapeIndexer-image.js
 // This script will fetch the metadata for a given contract and token range, download the images to the images/ folder, and create a database.
 
-const Mixtape = require('mixtapejs');
+const Mixtape = require('nft-mixtapejs');
 const fetch = require('cross-fetch');
 const fs = require('fs');
 const path = require('path');
