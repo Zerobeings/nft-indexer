@@ -8,19 +8,6 @@ const { promisify } = require('util');
 const pipeline = promisify(require('stream').pipeline);
 const mixtape = new Mixtape();
 
-const ipfsGateways = [
-  'https://ipfs.io/ipfs/',
-  'https://dweb.link/ipfs/',
-];
-
-let currentGatewayIndex = 0;
-
-const getNextIPFSGateway = () => {
-  const gateway = ipfsGateways[currentGatewayIndex];
-  currentGatewayIndex = (currentGatewayIndex + 1) % ipfsGateways.length;
-  return gateway;
-};
-
 const fetchWithTimeout = async (url, timeout = 10000) => {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
@@ -40,80 +27,106 @@ const isIPFS = (url) => {
 };
 
 const getIPFSUrl = (url) => {
-  const CID = url.replace('ipfs://', '').split('/')[0];
-  const gateway = getNextIPFSGateway();
-  return `${gateway}${CID}`;
+  const gateway = url.replace('ipfs://', 'https://ipfs.io/ipfs/');
+  return `${gateway}`;
 };
 
-const getContractURI = async (contractAddress, tokenId, provider) => {
-  const contract = new ethers.Contract(contractAddress, [
-    'function tokenURI(uint256 tokenId) external view returns (string memory)'
-  ], provider);
-
-  return await contract.tokenURI(tokenId);
+const getContractURI = async (contractAddress, tokenId, provider, network) => {
+  console.log(network)
+  if (network === 'ethereum' || network === 'avalanche') {
+    const contract = new ethers.Contract(contractAddress, [
+      'function tokenURI(uint256 tokenId) view returns (string)'
+    ], provider);
+    try {
+      return await contract.tokenURI(tokenId);
+    } catch (error) {
+      console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+    }
+  } else {
+    const contract = new ethers.Contract(contractAddress, [
+      'function uri(uint256 tokenId) external view returns (string memory)'
+    ], provider);
+    try {
+      return await contract.uri(tokenId);
+    } catch (error) {
+      try {
+        if (contractSpecial) {
+        return await contractSpecial.uri(tokenId);
+        }
+      } catch (error) {
+        console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+      }
+    }
+  }
 };
 
 (async () => {
   const contractAddress = readlineSync.question('Enter the contract address: ');
   const startToken = parseInt(readlineSync.question('Enter the starting token ID: '), 10);
   const endToken = parseInt(readlineSync.question('Enter the ending token ID: '), 10);
+  const network = readlineSync.question('Enter the network (e.g., "ethereum", "polygon", "avalanche", "fantom"): ');
   
   await mixtape.init({
-    path: path.join(__dirname, "ethereum", contractAddress), // switch network here
     config: {
       metadata: { schema: "migrate" }
     }
   });
 
-  //const provider = new ethers.providers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
-  const provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
+  const provider = new ethers.JsonRpcProvider(`https://${network}.rpc.thirdweb.com`);
 
-for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
-  let success = false;
-  let attempts = 0;
-  while (!success && attempts < 5) {
-    try {
-      const uri = await getContractURI(contractAddress, tokenId, provider);
-      const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
-
-      let metadata;
-        try {
-          const responseWithExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}.json`);
-          metadata = await responseWithExtension.json();
-        } catch (errorWithExtension) {
-          console.error(`Error fetching with .json extension: ${errorWithExtension.message}`);
-          
-          try {
-            const responseWithoutExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}`);
-            const responseText = await responseWithoutExtension.text();
-            metadata = JSON.parse(responseText); // Parse the response text into JSON
-          } catch (errorWithoutExtension) {
-            console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
+  for (let tokenId = startToken; tokenId <= endToken; tokenId++) {
+    let success = false;
+    let attempts = 0;
+    let metadata;
+    while (!success && attempts < 15) {
+      try {
+          const uri = await getContractURI(contractAddress, tokenId, provider, network);
+          const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
+          console.log(`Fetching metadata for token ${tokenId}`);
+  
+          if (uri.startsWith('data:application/json')) {
+              metadata = parseDataUri(uri);
+          } else {
+              try {
+                  const response = await axios.get(fetchURI.endsWith('.json') ? fetchURI : `${fetchURI}.json`);
+                  metadata = response.data;
+                  if (metadata.image && metadata.image.startsWith('https://gateway.pinata.cloud/ipfs/')) {
+                      metadata.image = metadata.image.replace('https://gateway.pinata.cloud/ipfs/', 'ipfs://');
+                  }
+              } catch (error) {
+                  console.error(`Error fetching metadata: ${error.message}`);
+                  if (!fetchURI.endsWith('.json')) {
+                      try {
+                          const responseWithoutExtension = await axios.get(fetchURI);
+                          metadata = responseWithoutExtension.data;
+                      } catch (errorWithoutExtension) {
+                          attempts++;
+                          console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
+                      }
+                  }
+              }
           }
-        }
-
-      metadata.index = tokenId; // Add index to metadata
-
-      await mixtape.write("metadata", metadata);
-
-      success = true;
-      console.log(`Fetched and processed token ${tokenId}`);
-    } catch (error) {
-      attempts++;
-      console.log(`Attempt ${attempts} failed for token ${tokenId}: ${error.message}`);
-
-      if (error.message.includes('revert') || error.message.includes('nonexistent token')) {
-        console.error(`Token ${tokenId} not found, stopping.`);
-        break;
-      }
-      
-      if (attempts >= 5) {
-        console.error(`Failed to fetch metadata for token ${tokenId} after multiple attempts, stopping.`);
-        break;
+          if (metadata) {
+              metadata.index = tokenId;
+              await mixtape.write("metadata", metadata);
+              success = true;
+              console.log(`Fetched and processed token ${tokenId}`);
+          }
+      } catch (error) {
+          attempts++;
+          console.log(`Attempt ${attempts} failed for token ${tokenId}: ${error.message}`);
+          if (error.message.includes('revert') || error.message.includes('nonexistent token')) {
+              console.error(`Token ${tokenId} not found, stopping.`);
+              break;
+          }
+  
+          if (attempts >= 15) {
+              console.error(`Failed to fetch metadata for token ${tokenId} after multiple attempts, stopping.`);
+              break;
+          }
       }
     }
   }
-}
 
 console.log('Finished fetching all tokens.');
 process.exit(0); 
