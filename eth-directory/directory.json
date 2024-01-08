@@ -112,5 +112,11 @@
     "name": "y00ts",
     "symbol": "y00t",
     "image": "https://metadata.y00ts.com/y/1.png"
+  },
+  {
+    "contract": "0x1AC8aCb916Fd62b5Ed35587A10D64cdfc940a271",
+    "name": "Night Vision Series",
+    "symbol": "NVS",
+    "image": "https://ipfs.io/ipfs/Qma5VJ3DBLppeZhFE7r1kncs8YX1pjBjJ8gL589fMqGZ2w/frame-000628.jpg"
   }
 ]

@@ -269,7 +269,7 @@ const runScriptForNetwork = async (network) => {
       try {
         await directory.fetchAllMetadata(network);
       } catch (error) {
-        console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+        console.error(`Error writing for network: ${error.message}`);
       }
 
       //Push to GitHub
