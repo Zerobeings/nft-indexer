@@ -12,10 +12,7 @@ const pipeline = promisify(require('stream').pipeline);
 const { exec } = require('child_process');
 const mixtape = new Mixtape();
 require('dotenv').config();
-const ethDirectory = require('./ethDirectory');
-const polyDirectory = require('./polyDirectory');
-// const avaxDirectory = require('./avaxDirectory');
-// const ftmDirectory = require('./ftmDirectory');
+const directory = require('./directory');
 
 async function updateIndexedCollections(contractAddress, network){
   try {
@@ -40,6 +37,7 @@ async function updateIndexedCollections(contractAddress, network){
       }
 
       const filePath = path.join(__dirname, dirPath, 'indexed.json');
+      const twFilePath = path.join(__dirname, dirPath, 'twindexed.json');
 
       // Initialize indexedCollections
       let indexedCollections = {};
@@ -60,6 +58,7 @@ async function updateIndexedCollections(contractAddress, network){
 
       // Write the updated data back to the file
       fs.writeFileSync(filePath, JSON.stringify(indexedCollections, null, 2));
+      fs.writeFileSync(twFilePath, JSON.stringify(indexedCollections, null, 2));
       console.log(`Updated indexed collections for ${network} network.`);
   } catch (error) {
       console.error(`An error occurred while updating indexed collections: ${error.message}`);
@@ -100,41 +99,26 @@ const isIPFS = (url) => {
 };
 
 const getIPFSUrl = (url) => {
-  const CID = url.replace('ipfs://', '').split('/')[0];
-  const gateway = 'https://ipfs.io/ipfs/';
-  return `${gateway}${CID}`;
+  const gateway = url.replace('ipfs://', 'https://ipfs.io/ipfs/');
+  return `${gateway}`;
 };
 
+
 const getContractURI = async (contractAddress, tokenId, provider, network) => {
-    let abiSpecial;
-    let providerI;
-    console.log(network)
-    // todo: add other networks and confirm contract calls for those networks
-    if (network === 'ethereum') {
-      const contract = new ethers.Contract(contractAddress, [
-        'function tokenURI(uint256 tokenId) view returns (string)'
-      ], provider);
-      try {
-        return await contract.tokenURI(tokenId);
-      } catch (error) {
-        console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
-        try {
-          abiSpecial = [
-            'function tokenURI(uint256 tokenId) view returns (string)'
-          ];
-          const contractSpecial = new ethers.Contract(contractAddress, abiSpecial, providerI);
-
-          return await contractSpecial.tokenURI(tokenId);
-        } catch (error) {
-          console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
-        }
-      }
-
+  console.log(network)
+  if (network === 'ethereum' || network === 'avalanche') {
+    const contract = new ethers.Contract(contractAddress, [
+      'function tokenURI(uint256 tokenId) view returns (string)'
+    ], provider);
+    try {
+      return await contract.tokenURI(tokenId);
+    } catch (error) {
+      console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
+    }
   } else {
     const contract = new ethers.Contract(contractAddress, [
       'function uri(uint256 tokenId) external view returns (string memory)'
     ], provider);
-
     try {
       return await contract.uri(tokenId);
     } catch (error) {
@@ -147,8 +131,6 @@ const getContractURI = async (contractAddress, tokenId, provider, network) => {
       }
     }
   }
-
-
 };
 
 const parseDataUri = (dataUri) => {
@@ -166,63 +148,52 @@ const parseDataUri = (dataUri) => {
     let attempts = 0;
     let metadata;
     while (!success && attempts < 15) {
-        try {
-            const uri = await getContractURI(contractAddress, tokenId, provider, network);
-            const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
-            console.log(`Fetching metadata for token ${tokenId}`);
-
-            if (uri.startsWith('data:application/json')) {
-                metadata = parseDataUri(uri);
-            } else if (uri.startsWith('https://gateway.pinata.cloud/ipfs/')) {
+      try {
+          const uri = await getContractURI(contractAddress, tokenId, provider, network);
+          const fetchURI = isIPFS(uri) ? getIPFSUrl(uri) : uri;
+          console.log(`Fetching metadata for token ${tokenId}`);
+  
+          if (uri.startsWith('data:application/json')) {
+              metadata = parseDataUri(uri);
+          } else {
               try {
-                url = uri.replace('https://gateway.pinata.cloud/ipfs/', 'https://ipfs.io/ipfs/');
-                const response = await fetchWithTimeout(url);
-                const responseText = await response.text();
-                metadata = JSON.parse(responseText); // Parse the response text into JSON
-                metadata.image = metadata.image.replace('https://gateway.pinata.cloud/ipfs/', 'ipfs://');
+                  const response = await axios.get(fetchURI.endsWith('.json') ? fetchURI : `${fetchURI}.json`);
+                  metadata = response.data;
+                  if (metadata.image && metadata.image.startsWith('https://gateway.pinata.cloud/ipfs/')) {
+                      metadata.image = metadata.image.replace('https://gateway.pinata.cloud/ipfs/', 'ipfs://');
+                  }
               } catch (error) {
-                console.error(`Error fetching from Pinata: ${error.message}`);
+                  console.error(`Error fetching metadata: ${error.message}`);
+                  if (!fetchURI.endsWith('.json')) {
+                      try {
+                          const responseWithoutExtension = await axios.get(fetchURI);
+                          metadata = responseWithoutExtension.data;
+                      } catch (errorWithoutExtension) {
+                          attempts++;
+                          console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
+                      }
+                  }
               }
-            } else if (uri.startsWith('https://')) {
-              try {
-                console.log(`Fetching with https from: ${uri}`);
-                const response = await fetchWithTimeout(uri);
-                const responseText = await response.text();
-                metadata = JSON.parse(responseText); // Parse the response text into JSON
-              } catch (error) {
-                console.error(`Error fetching without json extension from: ${error.message}`);
-                try {
-                  const response = await fetchWithTimeout(`${uri}.json`);
-                  const responseText = await response.text();
-                  metadata = JSON.parse(responseText); // Parse the response text into JSON
-                } catch (error) {
-                  console.error(`Error fetching with json extension from: ${error.message}`);
-                }     
-              }
-            } else {
-              try {
-                const responseWithExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}.json`);
-                metadata = await responseWithExtension.json();
-              } catch (errorWithExtension) {
-                console.error(`Error fetching with .json extension: ${errorWithExtension.message}`);
-                try {
-                  const responseWithoutExtension = await fetchWithTimeout(`${fetchURI}/${tokenId}`);
-                  const responseText = await responseWithoutExtension.text();
-                  metadata = JSON.parse(responseText); // Parse the response text into JSON
-                } catch (errorWithoutExtension) {
-                  attempts++;
-                  console.error(`Error fetching without .json extension: ${errorWithoutExtension.message}`);
-                }
-              }
-            }
-
-        } catch (error) {
-          attempts++;
-          console.error(`Attempt ${attempts} failed for item ${tokenId}: ${error.message}`);
-          if (attempts >= 15) {
-            throw new Error(`Failed to fetch metadata for item ${tokenId} after multiple attempts`);
           }
-        }
+          if (metadata) {
+              metadata.index = tokenId;
+              await mixtape.write("metadata", metadata);
+              success = true;
+              console.log(`Fetched and processed token ${tokenId}`);
+          }
+      } catch (error) {
+          attempts++;
+          console.log(`Attempt ${attempts} failed for token ${tokenId}: ${error.message}`);
+          if (error.message.includes('revert') || error.message.includes('nonexistent token')) {
+              console.error(`Token ${tokenId} not found, stopping.`);
+              break;
+          }
+  
+          if (attempts >= 15) {
+              console.error(`Failed to fetch metadata for token ${tokenId} after multiple attempts, stopping.`);
+              break;
+          }
+      }
     }
     return null; 
   };
@@ -232,23 +203,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
   console.log(`Creating mixtape for ${contractAddress}...${network}`);
 
   let provider;
-
-  switch (network) {
-    case 'polygon':
-      provider = new ethers.JsonRpcProvider('https://polygon.rpc.thirdweb.com');
-      break;
-    case 'ethereum':
-      provider = new ethers.JsonRpcProvider('https://ethereum.rpc.thirdweb.com');
-      break;
-    case 'avalanche':
-      provider = new ethers.JsonRpcProvider('https://avalanche.rpc.thirdweb.com');
-      break;
-    case 'fantom':
-      provider = new ethers.JsonRpcProvider('https://fantom.rpc.thirdweb.com');
-      break;
-    default:
-      throw new Error(`Unsupported network: ${network}`);
-  }
+  provider = new ethers.JsonRpcProvider(`https://${network}.rpc.thirdweb.com`);
   
     const networkDirPath = path.join(__dirname, network);
     if (!fs.existsSync(networkDirPath)) {
@@ -292,9 +247,6 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
 
   console.log(`Finished fetching all tokens for ${contractAddress}.`);
 };
-
-const delay = 1 * 60 * 1000; // 1 minutes in milliseconds
-
 
 const pushToGitHub = (network) => {
   return new Promise((resolve, reject) => {
@@ -342,45 +294,25 @@ const runScriptForNetwork = async (network) => {
     }
     // After mixtape creation is complete
     if (changesMade) {
-         // Update directory
-         if (network === 'ethereum') {
-          try {
-            await ethDirectory.fetchAllMetadata();
-          } catch (error) {
-            console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-          }
-        } else if (network === 'polygon') {
-          try {
-            await polyDirectory.fetchAllMetadata();
-          } catch (error) {
-            console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-          }
-        } 
-        // else if (network === 'avalanche') {
-        //   try {
-        //     await avaxDirectory.fetchAllMetadata();
-        //   } catch (error) {
-        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-        //   }
-        // }
-        // else if (network === 'fantom') {
-        //   try {
-        //     await ftmDirectory.fetchAllMetadata();
-        //   } catch (error) {
-        //     console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
-        //   }
-        // }
+      // Update directory
+      try {
+        await directory.fetchAllMetadata(network);
+      } catch (error) {
+        console.error(`Error writing metadata for ${contractAddress}: ${error.message}`);
+      }
 
-        //Push to GitHub
-        try {
-          await pushToGitHub(network);
-        } catch (error) {
-          console.error(`Error pushing to GitHub: ${error.message}`);
-        }
+      //Push to GitHub
+      try {
+        await pushToGitHub(network);
+      } catch (error) {
+        console.error(`Error pushing to GitHub: ${error.message}`);
+      }
     } else {
-        console.log(`No changes made for ${network} network.`);
+      console.log(`No changes made for ${network} network.`);
     }
 };
+
+const delay = 1 * 60 * 1000; // 1 minutes in milliseconds
 
 // Run for all networks in a loop
 function runScriptsInLoop() {
