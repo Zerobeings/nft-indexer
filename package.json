@@ -2,7 +2,7 @@
   "name": "nft-indexer",
   "version": "0.0.1",
   "description": "nft indexer",
-  "main": "mixtapeIndexer.js",
+  "main": "indexer.js",
   "author": "h0ward.eth",
   "license": "MIT",
   "private": true,
