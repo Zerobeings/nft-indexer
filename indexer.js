@@ -118,9 +118,15 @@ const getContractURI = async (contractAddress, tokenId, provider, network) => {
       return await contract.uri(tokenId);
     } catch (error) {
       try {
-        if (contractSpecial) {
-        return await contractSpecial.uri(tokenId);
+        const contract = new ethers.Contract(contractAddress, [
+          'function tokenURI(uint256 tokenId) view returns (string)'
+        ], provider);
+        try {
+        return await contract.tokenURI(tokenId);
+        } catch (error) {
+          console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
         }
+     
       } catch (error) {
         console.error(`Error fetching tokenURI for ${contractAddress} and ${tokenId}: ${error.message}`);
       }
@@ -176,7 +182,7 @@ const createMixtapeForContract = async ( contractAddress, startToken, endToken, 
               metadata = parseDataUri(uri);
           } else {
               try {
-                  const response = await axios.get(fetchURI.endsWith('.json') ? fetchURI : `${fetchURI}.json`);
+                  const response = await axios.get(fetchURI);
                   metadata = response.data;
                   if (metadata.image && metadata.image.startsWith('https://gateway.pinata.cloud/ipfs/')) {
                       metadata.image = metadata.image.replace('https://gateway.pinata.cloud/ipfs/', 'ipfs://');
