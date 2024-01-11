@@ -16,11 +16,5 @@
         "name": "Doodleverse",
         "symbol": "DOODLE",
         "image": "ipfs://QmPjFnPpaimsFvx4HMi58JqTyzKgEL3o6VKi71suW8ndRG"
-    },
-    {
-      "contract": "0x59486A74fef67d573B7406f8A5ffD70F5Ee60e86",
-      "name": "Smol Apes",
-      "symbol": "APE",
-      "image": "ipfs://QmcoL3ve7KjHMUiqkxf2nRdfGcewv2Aigb4Fe4TfPME525/1.png"
     }
 ]
