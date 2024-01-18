@@ -22,5 +22,11 @@
     "name": "spaceportal",
     "symbol": "SPPO",
     "image": "ipfs://bafybeigtcmabbsnuh2wk7zibz4hziccg6cu7p4fxthda4ijdk2ohu2xwxm/spaceportal.png"
+  }, 
+  {
+  "contract": "0x1a90102b680807CE176bE575479e4b824fD1F392",
+  "name": "Simply256",
+  "symbol": "SIMPLY",
+  "image": "ipfs://bafybeiek3bfn32swajsrzljdpmvfjvs2jqu2xvxp4n7ta5mk3typyhnjnu/1.png"
   }
 ]
