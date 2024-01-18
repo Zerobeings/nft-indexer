@@ -26,7 +26,7 @@ async function getContractMetadata(contractAddress) {
         let imageUrl = '';
         if (tokenUri) {
             const tokenMetadataUrl = tokenUri.startsWith('ipfs://')
-                ? `https://ipfs.io/ipfs/${tokenUri.slice(7)}`
+                ? tokenUri.replace('ipfs://', 'https://ipfs.io/ipfs/')
                 : tokenUri;
 
             const tokenMetadataResponse = await axios.get(tokenMetadataUrl);

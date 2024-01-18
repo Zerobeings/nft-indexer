@@ -26,7 +26,7 @@ async function getContractMetadata(contractAddress) {
         let imageUrl = '';
         if (tokenUri) {
             const tokenMetadataUrl = tokenUri.startsWith('ipfs://')
-                ? `https://ipfs.io/ipfs/${tokenUri.slice(7)}`
+                ? tokenUri.replace('ipfs://', 'https://ipfs.io/ipfs/')
                 : tokenUri;
 
             const tokenMetadataResponse = await axios.get(tokenMetadataUrl);
@@ -37,8 +37,35 @@ async function getContractMetadata(contractAddress) {
 
         return { contract: contractAddress, name, symbol, image: imageUrl };
     } catch (error) {
-        console.error('Error fetching metadata for address:', contractAddress, error);
-        
+        console.error('Error fetching metadata with method 1 for address:', contractAddress, error);
+        const contract = new ethers.Contract(contractAddress, [
+            'function name() view returns (string)',
+            'function symbol() view returns (string)',
+            'function tokenURI(uint256 tokenId) view returns (string)',
+        ], provider);
+
+        try {
+            const name = await contract.name();
+            const symbol = await contract.symbol();
+            const tokenUri = await contract.tokenURI(1);
+    
+            // Fetch and parse token metadata
+            let imageUrl = '';
+            if (tokenUri) {
+                const tokenMetadataUrl = tokenUri.startsWith('ipfs://')
+                    ? tokenUri.replace('ipfs://', 'https://ipfs.io/ipfs/')
+                    : tokenUri;
+    
+                const tokenMetadataResponse = await axios.get(tokenMetadataUrl);
+                if (tokenMetadataResponse.data && tokenMetadataResponse.data.image) {
+                    imageUrl = tokenMetadataResponse.data.image;
+                }
+            }
+    
+            return { contract: contractAddress, name, symbol, image: imageUrl };
+        } catch (error) {
+            console.error('Error fetching metadata for address:', contractAddress, error);
+        }
     }
 }
 
