@@ -28,5 +28,11 @@
     "name": "Simply256",
     "symbol": "SIMPLY",
     "image": "ipfs://bafybeiek3bfn32swajsrzljdpmvfjvs2jqu2xvxp4n7ta5mk3typyhnjnu/1.png"
+  },
+  {
+    "contract": "0xfbe3AB0cbFbD17d06bdD73aA3F55aaf038720F59",
+    "name": "Voxies",
+    "symbol": "VOXIES",
+    "image": "https://game-prod.voxies.io/voxies/contract/1"
   }
 ]

@@ -38,6 +38,7 @@ async function getContractMetadata(contractAddress) {
         return { contract: contractAddress, name, symbol, image: imageUrl };
     } catch (error) {
         console.error('Error fetching metadata for address:', contractAddress, error);
+        
     }
 }
 
