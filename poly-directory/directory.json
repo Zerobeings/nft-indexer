@@ -33,6 +33,6 @@
     "contract": "0xfbe3AB0cbFbD17d06bdD73aA3F55aaf038720F59",
     "name": "Voxies",
     "symbol": "VOXIES",
-    "image": "https://game-prod.voxies.io/voxies/contract/1"
+    "image": "https://voxies-data-final.s3.us-east-2.amazonaws.com/0.gif"
   }
 ]
