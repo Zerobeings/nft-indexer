@@ -285,7 +285,7 @@ const runScriptForNetwork = async (network) => {
   }
 };
 
-const delay = 1 * 60 * 1000; // 1 minutes in milliseconds
+const delay = 15 * 60 * 1000; // 15 minutes in milliseconds
 
 // Run for all networks in a loop
 function runScriptsInLoop() {
