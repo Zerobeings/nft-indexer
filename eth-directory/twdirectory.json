@@ -190,11 +190,5 @@
     "name": "BITBEAST",
     "symbol": "BIT",
     "image": "https://a.akidcalledbeast.com/0xb586d1dc01178ce79046e00ede62a3218722dfdd/png/1.png"
-  },
-  {
-    "contract": "0xABD93520096bc967DA49fb7B2c14FD9e21B7956E",
-    "name": "X-Moose",
-    "symbol": "XMS",
-    "image": "https://metadata.mooselands.io/1.png"
   }
 ]
