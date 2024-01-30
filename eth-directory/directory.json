@@ -118,5 +118,11 @@
     "name": "Night Vision Series",
     "symbol": "NVS",
     "image": "https://ipfs.io/ipfs/Qma5VJ3DBLppeZhFE7r1kncs8YX1pjBjJ8gL589fMqGZ2w/frame-000628.jpg"
+  },
+  {
+    "contract": "0xABD93520096bc967DA49fb7B2c14FD9e21B7956E",
+    "name": "X-Moose",
+    "symbol": "XMS",
+    "image": "https://metadata.mooselands.io/1.png"
   }
 ]
