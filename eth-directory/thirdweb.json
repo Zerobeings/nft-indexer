@@ -1,0 +1,134 @@
+[
+    {
+      "contract": "0x8f170F73076b7A45749677B1681b13366B3C80f7",
+      "name": "Hexagonal Zero",
+      "symbol": "HEXZ",
+      "image": "ipfs://QmeV9C1VmJDJ7jCLy8GUwqhrRRj3VVxzood31pEyyWZtnw/001.png"
+    },
+    {
+      "contract": "0xe785E82358879F061BC3dcAC6f0444462D4b5330",
+      "name": "World Of Women",
+      "symbol": "WOW",
+      "image": "ipfs://QmSdv72GwEDFoCspXJN7Bki9UzDyTsmbAd8zoRtMHjW3qT"
+    },
+    {
+      "contract": "0xd9b78A2F1dAFc8Bb9c60961790d2beefEBEE56f4",
+      "name": "tiny dinos",
+      "symbol": "dino",
+      "image": "ipfs://QmVCLxmzMstWpnCE2caF3AfRNEJmdiA6Z6a8BECnXqd98r/1.png"
+    },
+    {
+      "contract": "0xC9d198089D6c31d0Ca5Cc5B92C97a57A97BBfdE2",
+      "name": "Space Riders",
+      "symbol": "SPR",
+      "image": "ipfs://QmYCXBMG4BMuoXxkHbGR2GpmJPySJH4HDLMU9eDZkYUNjd/1.png"
+    },
+    {
+      "contract": "0x878586dA1ed007A4D19DE3e7A59eCa98814e2808",
+      "name": "Imaginary Rides",
+      "symbol": "IR",
+      "image": "https://assets.imaginaryones.com/rides/gif/1.gif"
+    },
+    {
+      "contract": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
+      "name": "BoredApeYachtClub",
+      "symbol": "BAYC",
+      "image": "ipfs://QmPbxeGcXhYQQNgsC6a36dDyYUcHgMLnGKnF8pVFmGsvqi"
+    },
+    {
+      "contract": "0xED5AF388653567Af2F388E6224dC7C4b3241C544",
+      "name": "Azuki",
+      "symbol": "AZUKI",
+      "image": "ipfs://QmYDvPAXtiJg7s8JdRBSLWdgSphQdac8j1YuQNNxcGE1hg/1.png"
+    },
+    {
+      "contract": "0x524cAB2ec69124574082676e6F654a18df49A048",
+      "name": "LilPudgys",
+      "symbol": "LP",
+      "image": "https://api.pudgypenguins.io/lil/image/1"
+    },
+    {
+      "contract": "0x5B6438089D0bb7Fca8218B9A56F241d1E313719C",
+      "name": "Robot Feelings",
+      "symbol": "RF",
+      "image": "ipfs://QmSU3Cuz4K47voLt3sGo35adcirZ9kqDbjakiU5YtGq72Z/1.png"
+    },
+    {
+      "contract": "0x79Aa05963c92A2a10d96bD840Eb5e73a1E675E92",
+      "name": "The Randoms",
+      "symbol": "RNDMS",
+      "image": "ipfs://QmWs5SNwXrU5Nyiiwua8CjHr2MyPcxeeyCersRYekA4XN3/1.png"
+    },
+    {
+      "contract": "0x960b7a6BCD451c9968473f7bbFd9Be826EFd549A",
+      "name": "OnChainMonkey",
+      "symbol": "OCMONK",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaW5ZTWluIG1lZXQiIHZpZXdCb3g9IjAgMCA1MDAgNTAwIj48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgc3R5bGU9ImZpbGw6I2U5MiIvPjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTIwIiB4PSI5OSIgeT0iNDAwIiBzdHlsZT0iZmlsbDojNTMyIi8+PGNpcmNsZSBjeD0iMTkwIiBjeT0iNDcwIiByPSI1IiBzdHlsZT0iZmlsbDojNjUzIi8+PGNpcmNsZSBjeD0iMzEwIiBjeT0iNDcwIiByPSI1IiBzdHlsZT0iZmlsbDojNjUzIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iMjUwIiByPSI1MCIgc3R5bGU9ImZpbGw6IzUzMiIvPjxjaXJjbGUgY3g9IjEwMCIgY3k9IjI1MCIgcj0iMjAiIHN0eWxlPSJmaWxsOiM2NTMiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIyNTAiIHI9IjUwIiBzdHlsZT0iZmlsbDojNTMyIi8+PGNpcmNsZSBjeD0iNDAwIiBjeT0iMjUwIiByPSIyMCIgc3R5bGU9ImZpbGw6IzY1MyIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjI1MCIgcj0iMTUwIiBzdHlsZT0iZmlsbDojNTMyIi8+PGNpcmNsZSBjeD0iMjUwIiBjeT0iMjUwIiByPSIxMjAiIHN0eWxlPSJmaWxsOiM2NTMiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMTUiIHI9IjM1IiBzdHlsZT0iZmlsbDojZmZmIi8+PGNpcmNsZSBjeD0iMzA1IiBjeT0iMjIyIiByPSIzMSIgc3R5bGU9ImZpbGw6I2ZmZiIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIyMCIgcj0iMjAiIHN0eWxlPSJmaWxsOiM2NTMiLz48Y2lyY2xlIGN4PSIzMDAiIGN5PSIyMjAiIHI9IjIwIiBzdHlsZT0iZmlsbDojNjUzIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjIwIiByPSI3IiBzdHlsZT0iZmlsbDojMDAwIi8+PGNpcmNsZSBjeD0iMzAwIiBjeT0iMjIwIiByPSI3IiBzdHlsZT0iZmlsbDojMDAwIi8+PGVsbGlwc2UgY3g9IjI1MCIgY3k9IjMxNSIgcng9Ijg0IiByeT0iMzQiIHN0eWxlPSJmaWxsOiM3NzciLz48cmVjdCB4PSIxOTUiIHk9IjMzMCIgd2lkdGg9IjExMCIgaGVpZ2h0PSIzIiBzdHlsZT0iZmlsbDojMDAwIi8+PGNpcmNsZSBjeD0iMjY4IiBjeT0iMjk1IiByPSI1IiBzdHlsZT0iZmlsbDojMDAwIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMjk1IiByPSI1IiBzdHlsZT0iZmlsbDojMDAwIi8+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSI5OSIgeD0iMTUwIiB5PSI0MCIgc3R5bGU9ImZpbGw6IzAwZiIvPjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMzMiIHg9IjE1MCIgeT0iMTA2IiBzdHlsZT0iZmlsbDojZjgwIi8+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIxMjAiIHg9Ijk5IiB5PSI0MDAiIHN0eWxlPSJmaWxsOiNmMGYiLz48cmVjdCB3aWR0aD0iNTAiIGhlaWdodD0iNTUiIHg9IjI4MCIgeT0iNDMwIiBzdHlsZT0iZmlsbDojOTBmIi8+PC9zdmc+"
+    },
+    {
+      "contract": "0x93a796B1E846567Fe3577af7B7BB89F71680173a",
+      "name": "ChainFaces Arena",
+      "symbol": "ლ⚈෴⚈ლ",
+      "image": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0MDAnIGhlaWdodD0nNDAwJyBzdHlsZT0nYmFja2dyb3VuZC1jb2xvcjpSR0IoMTI4LDEyOCwxMjgpJz48dGV4dCB4PSc1MCUnIHk9JzUwJScgZG9taW5hbnQtYmFzZWxpbmU9J21pZGRsZScgdGV4dC1hbmNob3I9J21pZGRsZScgZm9udC1zaXplPSc3NXB4JyBmaWxsPSdSR0IoMTQ4LDI1NiwyMDkpJz7hg5rimojgt7Timojhg5o8L3RleHQ+PC9zdmc+"
+    },
+    {
+      "contract": "0x9A74559843f7721f69651ecA916B780Ef78Bd060",
+      "name": "Poglin: Battle For Havens Destiny",
+      "symbol": "POGLIN-1",
+      "image": "https://lime-adorable-mongoose-591.mypinata.cloud/ipfs/QmcTFV7yR22Je7F3GUfms7gfn4LWghYaXJDAP4ad329Mek/1.gif"
+    },
+    {
+      "contract": "0x1AC8aCb916Fd62b5Ed35587A10D64cdfc940a271",
+      "name": "Night Vision Series",
+      "symbol": "NVS",
+      "image": "https://ipfs.io/ipfs/Qma5VJ3DBLppeZhFE7r1kncs8YX1pjBjJ8gL589fMqGZ2w/frame-000628.jpg"
+    },
+    {
+      "contract": "0x306b1ea3ecdf94aB739F1910bbda052Ed4A9f949",
+      "name": "Beanz",
+      "symbol": "BEANZ",
+      "image": "ipfs://QmTRuWHr7bpqscUWFmhXndzf5AdQqkekhqwgbyJCqKMHrL/1.png"
+    },
+    {
+      "contract": "0x9134251dcFeDB7B668fb075FDD2873A33B029daC",
+      "name": "Inka Blinks",
+      "symbol": "IB",
+      "image": "ipfs://bafybeibsd3tyfjqnemfehi54r2emstty6ue6mlfb544rremruy25xqahr4/1.gif"
+    },
+    {
+      "contract": "0x0F23927B0466bE6531e8dC84F047d34209a88E41",
+      "name": "Steamboat Willie",
+      "symbol": "$MICKEY",
+      "image": "ipfs://QmcVE3VM7uyXC8rX2SZi3X6GeEKMnvnZt7FmZHBgbNXpj7/1.png"
+    },
+    {
+      "contract": "0xd774557b647330C91Bf44cfEAB205095f7E6c367",
+      "name": "Nakamigos",
+      "symbol": "NKMGS",
+      "image": "ipfs://QmVbye61dgnVGC2H2fE1obBvvE8zGXUD835J2vQU4KdE2F"
+    },
+    {
+      "contract": "0x364C828eE171616a39897688A831c2499aD972ec",
+      "name": "Sappy Seals",
+      "symbol": "SAPS",
+      "image": "ipfs://QmUs4WQP47QKGwzPLjVMmhqTbspJfAC344abDEE2UT52HF/1.png"
+    },
+    {
+      "contract": "0x1A92f7381B9F03921564a437210bB9396471050C",
+      "name": "Cool Cats",
+      "symbol": "COOL",
+      "image": "https://ipfs.io/ipfs/QmYrxAviWHGugdikgU1Awc8MRtfqxMYYRmBuCTMEc5mCAx"
+    },
+    {
+      "contract": "0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e",
+      "name": "Doodles",
+      "symbol": "DOODLE",
+      "image": "ipfs://QmTDxnzcvj2p3xBrKcGv1wxoyhAn2yzCQnZZ9LmFjReuH9"
+    },
+    {
+      "contract": "0x036721e5A769Cc48B3189EFbb9ccE4471E8A48B1",
+      "name": "Checks",
+      "symbol": "CHECKS",
+      "image": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjgwIDY4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBzdHlsZT0id2lkdGg6MTAwJTtiYWNrZ3JvdW5kOmJsYWNrOyI+PGRlZnM+PHBhdGggaWQ9ImNoZWNrIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yMS4zNiA5Ljg4NkEzLjkzMyAzLjkzMyAwIDAgMCAxOCA4Yy0xLjQyMyAwLTIuNjcuNzU1LTMuMzYgMS44ODdhMy45MzUgMy45MzUgMCAwIDAtNC43NTMgNC43NTNBMy45MzMgMy45MzMgMCAwIDAgOCAxOGMwIDEuNDIzLjc1NSAyLjY2OSAxLjg4NiAzLjM2YTMuOTM1IDMuOTM1IDAgMCAwIDQuNzUzIDQuNzUzIDMuOTMzIDMuOTMzIDAgMCAwIDQuODYzIDEuNTkgMy45NTMgMy45NTMgMCAwIDAgMS44NTgtMS41ODkgMy45MzUgMy45MzUgMCAwIDAgNC43NTMtNC43NTRBMy45MzMgMy45MzMgMCAwIDAgMjggMThhMy45MzMgMy45MzMgMCAwIDAtMS44ODctMy4zNiAzLjkzNCAzLjkzNCAwIDAgMC0xLjA0Mi0zLjcxMSAzLjkzNCAzLjkzNCAwIDAgMC0zLjcxLTEuMDQzWm0tMy45NTggMTEuNzEzIDQuNTYyLTYuODQ0Yy41NjYtLjg0Ni0uNzUxLTEuNzI0LTEuMzE2LS44NzhsLTQuMDI2IDYuMDQzLTEuMzcxLTEuMzY4Yy0uNzE3LS43MjItMS44MzYuMzk2LTEuMTE2IDEuMTE2bDIuMTcgMi4xNWEuNzg4Ljc4OCAwIDAgMCAxLjA5Ny0uMjJaIj48L3BhdGg+PHJlY3QgaWQ9InNxdWFyZSIgd2lkdGg9IjM2IiBoZWlnaHQ9IjM2IiBzdHJva2U9IiMxOTE5MTkiPjwvcmVjdD48ZyBpZD0icm93Ij48dXNlIGhyZWY9IiNzcXVhcmUiIHg9IjE5NiIgeT0iMTYwIi8+PHVzZSBocmVmPSIjc3F1YXJlIiB4PSIyMzIiIHk9IjE2MCIvPjx1c2UgaHJlZj0iI3NxdWFyZSIgeD0iMjY4IiB5PSIxNjAiLz48dXNlIGhyZWY9IiNzcXVhcmUiIHg9IjMwNCIgeT0iMTYwIi8+PHVzZSBocmVmPSIjc3F1YXJlIiB4PSIzNDAiIHk9IjE2MCIvPjx1c2UgaHJlZj0iI3NxdWFyZSIgeD0iMzc2IiB5PSIxNjAiLz48dXNlIGhyZWY9IiNzcXVhcmUiIHg9IjQxMiIgeT0iMTYwIi8+PHVzZSBocmVmPSIjc3F1YXJlIiB4PSI0NDgiIHk9IjE2MCIvPjwvZz48L2RlZnM+PHJlY3Qgd2lkdGg9IjY4MCIgaGVpZ2h0PSI2ODAiIGZpbGw9ImJsYWNrIi8+PHJlY3QgeD0iMTg4IiB5PSIxNTIiIHdpZHRoPSIzMDQiIGhlaWdodD0iMzc2IiBmaWxsPSIjMTExIi8+PGcgaWQ9ImdyaWQiIHg9IjE5NiIgeT0iMTYwIj48dXNlIGhyZWY9IiNyb3ciIHk9IjAiLz48dXNlIGhyZWY9IiNyb3ciIHk9IjM2Ii8+PHVzZSBocmVmPSIjcm93IiB5PSI3MiIvPjx1c2UgaHJlZj0iI3JvdyIgeT0iMTA4Ii8+PHVzZSBocmVmPSIjcm93IiB5PSIxNDQiLz48dXNlIGhyZWY9IiNyb3ciIHk9IjE4MCIvPjx1c2UgaHJlZj0iI3JvdyIgeT0iMjE2Ii8+PHVzZSBocmVmPSIjcm93IiB5PSIyNTIiLz48dXNlIGhyZWY9IiNyb3ciIHk9IjI4OCIvPjx1c2UgaHJlZj0iI3JvdyIgeT0iMzI0Ii8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI4NiwgMjg2KSBzY2FsZSgzKSI+PHVzZSBocmVmPSIjY2hlY2siIGZpbGw9IiNERTMyMzciPjxhbmltYXRlIGF0dHJpYnV0ZU5hbWU9ImZpbGwiIHZhbHVlcz0iI0RFMzIzNzsjQzIzNTMyOyNGRjdGOEU7I0U4NEFBOTsjMzcxNDcxOyM1MjVFQUE7IzQ1NzZEMDsjOUFEOUZCOyMzMzc1OEQ7Izc3RDNERTsjOURFRkJGOyM4NkU0OEU7I0E3Q0E0NTsjRkFFMjcyOyNGNEM0NEE7I0ZBRDA2NDsjRjJBODQwOyNGMTg5MzA7I0QwNUMzNTsjRUM3MzY4OyNERTMyMzciIGR1cj0iMTBzIiBiZWdpbj0iYW5pbWF0aW9uLmJlZ2luIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgLz48L3VzZT48L2c+PHJlY3Qgd2lkdGg9IjY4MCIgaGVpZ2h0PSI2ODAiIGZpbGw9InRyYW5zcGFyZW50Ij48YW5pbWF0ZSBhdHRyaWJ1dGVOYW1lPSJ3aWR0aCIgZnJvbT0iNjgwIiB0bz0iMCIgZHVyPSIwLjJzIiBiZWdpbj0iY2xpY2siIGZpbGw9ImZyZWV6ZSIgaWQ9ImFuaW1hdGlvbiIvPjwvcmVjdD48L3N2Zz4="
+    }
+  ]

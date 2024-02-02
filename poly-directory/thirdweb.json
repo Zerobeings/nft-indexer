@@ -1,0 +1,20 @@
+[
+    {
+      "contract": "0xdd09d4D39d1674551fA355CF9a31B674e7D44767",
+      "name": "locatia",
+      "symbol": "LOCA",
+      "image": "ipfs://bafybeibknyau5s2n2jrownhygkrfxrwvfimkuopchucs6mp7dwzxks3bum/locatia.png"
+    },
+    {
+      "contract": "0xf4F065dbf9926463D1D4B9d7A416fb655F5e562e",
+      "name": "buildspace s4",
+      "symbol": "BSS4",
+      "image": "ipfs://bafybeidqruob76qsl6r3lea3mu3e757rrcqowdskeg2mrevbzgoxx3fvzm/alterok.png"
+    },
+    {
+      "contract": "0xd86d4167EC0B6B3252F1fB93c37Adb0BbD26BD46",
+      "name": "spaceportal",
+      "symbol": "SPPO",
+      "image": "ipfs://bafybeigtcmabbsnuh2wk7zibz4hziccg6cu7p4fxthda4ijdk2ohu2xwxm/spaceportal.png"
+    }
+  ]

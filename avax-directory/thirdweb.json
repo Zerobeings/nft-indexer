@@ -1,0 +1,20 @@
+[
+    {
+        "contract": "0x21B54507b032D4Cc17DF8D08A87a58059869Bd9f",
+        "name": "For Love in collaboration with CURAT3D",
+        "symbol": "C3",
+        "image": "ipfs://bafybeifnnydknmo6m6ppekbopqaaw3chcsqorqdc3ss6ppoz6q4guh573u/2.jpg"
+    },
+    {
+        "contract": "0x17d11B8802bd5eD3FcC838bE353D927B4983C2dE",
+        "name": "Happy Sun",
+        "symbol": "HS",
+        "image": "ipfs://QmcFvZwbUYVetVwbYCvmyubkvwGaR6wSmG7ctxNv317PvX/0.png"
+    },
+    {
+        "contract": "0x6aF53a162Deb0d3ABfd4F47Bd6c9615b08D553FD",
+        "name": "Doodleverse",
+        "symbol": "DOODLE",
+        "image": "ipfs://QmPjFnPpaimsFvx4HMi58JqTyzKgEL3o6VKi71suW8ndRG"
+    }
+]
