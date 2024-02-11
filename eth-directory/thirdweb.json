@@ -12,22 +12,10 @@
       "image": "ipfs://QmSdv72GwEDFoCspXJN7Bki9UzDyTsmbAd8zoRtMHjW3qT"
     },
     {
-      "contract": "0xd9b78A2F1dAFc8Bb9c60961790d2beefEBEE56f4",
-      "name": "tiny dinos",
-      "symbol": "dino",
-      "image": "ipfs://QmVCLxmzMstWpnCE2caF3AfRNEJmdiA6Z6a8BECnXqd98r/1.png"
-    },
-    {
       "contract": "0xC9d198089D6c31d0Ca5Cc5B92C97a57A97BBfdE2",
       "name": "Space Riders",
       "symbol": "SPR",
       "image": "ipfs://QmYCXBMG4BMuoXxkHbGR2GpmJPySJH4HDLMU9eDZkYUNjd/1.png"
-    },
-    {
-      "contract": "0x878586dA1ed007A4D19DE3e7A59eCa98814e2808",
-      "name": "Imaginary Rides",
-      "symbol": "IR",
-      "image": "https://assets.imaginaryones.com/rides/gif/1.gif"
     },
     {
       "contract": "0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D",
@@ -54,12 +42,6 @@
       "image": "ipfs://QmSU3Cuz4K47voLt3sGo35adcirZ9kqDbjakiU5YtGq72Z/1.png"
     },
     {
-      "contract": "0x79Aa05963c92A2a10d96bD840Eb5e73a1E675E92",
-      "name": "The Randoms",
-      "symbol": "RNDMS",
-      "image": "ipfs://QmWs5SNwXrU5Nyiiwua8CjHr2MyPcxeeyCersRYekA4XN3/1.png"
-    },
-    {
       "contract": "0x960b7a6BCD451c9968473f7bbFd9Be826EFd549A",
       "name": "OnChainMonkey",
       "symbol": "OCMONK",
@@ -76,12 +58,6 @@
       "name": "Poglin: Battle For Havens Destiny",
       "symbol": "POGLIN-1",
       "image": "https://lime-adorable-mongoose-591.mypinata.cloud/ipfs/QmcTFV7yR22Je7F3GUfms7gfn4LWghYaXJDAP4ad329Mek/1.gif"
-    },
-    {
-      "contract": "0x1AC8aCb916Fd62b5Ed35587A10D64cdfc940a271",
-      "name": "Night Vision Series",
-      "symbol": "NVS",
-      "image": "https://ipfs.io/ipfs/Qma5VJ3DBLppeZhFE7r1kncs8YX1pjBjJ8gL589fMqGZ2w/frame-000628.jpg"
     },
     {
       "contract": "0x306b1ea3ecdf94aB739F1910bbda052Ed4A9f949",
